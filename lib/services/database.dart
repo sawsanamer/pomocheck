@@ -6,6 +6,7 @@ class DatabaseMethods {
         .collection("users")
         .where("name", isEqualTo: username)
         .getDocuments();
+    int k = 0;
   }
 
   getUserByEmail(String email) async {
