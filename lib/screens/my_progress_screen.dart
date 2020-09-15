@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:pomocheck/helper/constants_class.dart';
+import 'package:pomocheck/screens/read_more_screen.dart';
 import 'package:pomocheck/screens/their_progress_screen.dart';
 import 'package:pomocheck/services/database.dart';
+import 'package:rflutter_alert/rflutter_alert.dart';
 
 import '../constants.dart';
 
@@ -43,21 +45,29 @@ class MyProgressScreen extends StatefulWidget {
 
 class _MyProgressScreenState extends State<MyProgressScreen> {
   DatabaseMethods databaseMethods = DatabaseMethods();
-  dynamic searchSnapshot;
-  dynamic searchSnapshotForUser2;
+  dynamic searchSnapshotForLoggedInUser;
   String username2;
-  dynamic theirProgressSnapshot;
+  dynamic searchSnapshotForUsername2;
   List username2stateOfSubtasks;
   List username2stateOfSubtasks1;
   int username2MyScore;
   int username2progress;
   List username2scoreArray;
+  List username1stateOfSubtasks;
 
   int newScore;
   @override
   void initState() {
     newScore = widget.myScore;
     super.initState();
+  }
+
+  calculateNewScore() async {
+    int newScore = 0;
+    for (int i = 0; i < widget.scoreArray.length; i++) {
+      newScore += widget.scoreArray[i];
+    }
+    return newScore;
   }
 
   @override
@@ -102,14 +112,16 @@ class _MyProgressScreenState extends State<MyProgressScreen> {
                   ),
                   GestureDetector(
                     onTap: () async {
+                      //getUser2info so we can show it in their progrss screen
                       if (widget.sentBy == ConstantsClass.myName)
                         username2 = widget.recievedBy;
                       else
                         username2 = widget.sentBy;
 
-                      theirProgressSnapshot = await databaseMethods
+                      searchSnapshotForUsername2 = await databaseMethods
                           .getChallengeDetailsDocumentsByUsername(username2);
-                      theirProgressSnapshot.documents.forEach((document) async {
+                      searchSnapshotForUsername2.documents
+                          .forEach((document) async {
                         String documentId = document.documentID;
                         String title = document.data['title'];
                         if (title == widget.title) {
@@ -120,12 +132,6 @@ class _MyProgressScreenState extends State<MyProgressScreen> {
                           username2progress = await document.data['progress'];
                           username2scoreArray =
                               await document.data['scoreArray'];
-
-                          print("AAAAAAAAAAAa");
-                          print(username2scoreArray);
-                          print(username2progress);
-                          print(username2MyScore);
-                          print(username2stateOfSubtasks1);
 
                           Navigator.push(
                             context,
@@ -149,6 +155,7 @@ class _MyProgressScreenState extends State<MyProgressScreen> {
                               ),
                             ),
                           );
+
                           return;
                         }
                       });
@@ -220,14 +227,14 @@ class _MyProgressScreenState extends State<MyProgressScreen> {
                                       else
                                         username2 = widget.sentBy;
 
-                                      //step 2: get their documents
-                                      searchSnapshotForUser2 = await databaseMethods
-                                          .getChallengeDetailsDocumentsByUsername(
-                                              username2);
+                                      //step 2: get their documents to compare
+//                                      theirProgressSnapshot = await databaseMethods
+//                                          .getChallengeDetailsDocumentsByUsername(
+//                                              username2);
 
                                       //step 3: get their  username2stateOfSubtasks to compare what has
                                       //been checked
-                                      searchSnapshotForUser2.documents
+                                      searchSnapshotForUsername2.documents
                                           .forEach((document) {
                                         String documentId = document.documentID;
                                         String title = document.data['title'];
@@ -245,26 +252,17 @@ class _MyProgressScreenState extends State<MyProgressScreen> {
                                         widget.scoreArray[index] = 12;
                                       }
 
-                                      calculateNewScore() async {
-                                        int newScore = 0;
-                                        for (int i = 0;
-                                            i < widget.scoreArray.length;
-                                            i++) {
-                                          newScore += widget.scoreArray[i];
-                                        }
-                                        return newScore;
-                                      }
-
                                       newScore = await calculateNewScore();
 
                                       setState(() {});
 
                                       //get logged in user things so we can update
-                                      searchSnapshot = await databaseMethods
-                                          .getChallengeDetailsDocumentsByUsername(
-                                              ConstantsClass.myName);
+                                      searchSnapshotForLoggedInUser =
+                                          await databaseMethods
+                                              .getChallengeDetailsDocumentsByUsername(
+                                                  ConstantsClass.myName);
 
-                                      searchSnapshot.documents
+                                      searchSnapshotForLoggedInUser.documents
                                           .forEach((document) {
                                         String documentId = document.documentID;
                                         String title = document.data['title'];
@@ -351,6 +349,59 @@ class _MyProgressScreenState extends State<MyProgressScreen> {
                             color: Colors.white,
                             fontFamily: 'Domine',
                             fontSize: 24),
+                      ),
+                    ),
+                  ),
+                  Container(
+                    margin: EdgeInsets.only(bottom: 20),
+                    padding: EdgeInsets.all(15),
+                    decoration: BoxDecoration(
+                      borderRadius: BorderRadius.circular(10),
+                      color: kTurqoiseCustom,
+                    ),
+                    child: Center(
+                      child: GestureDetector(
+                        onTap: () {
+                          //check that all subtasks are  checked
+
+                          searchSnapshotForLoggedInUser.documents
+                              .forEach((document) {
+                            String documentId = document.documentID;
+                            String title = document.data['title'];
+                            if (title == widget.title) {
+                              username1stateOfSubtasks =
+                                  document.data['stateOfSubtasks'];
+                            }
+                          });
+
+                          bool flag = true;
+                          for (int i = 0;
+                              i < username1stateOfSubtasks.length;
+                              i++) {
+                            if (username1stateOfSubtasks[i] == false) {
+                              flag = false;
+                            }
+                          }
+
+                          if (flag == false) {
+                            //pop up
+                          } else {
+                            //update status to finished in both users
+                            //add dare=null in both users
+                            //add winner=loggedinuser
+                            //add loser= username2
+                            //go to you won screen
+                            //
+
+                          }
+                        },
+                        child: Text(
+                          "Finished all tasks",
+                          style: TextStyle(
+                              color: Colors.white,
+                              fontFamily: 'Domine',
+                              fontSize: 24),
+                        ),
                       ),
                     ),
                   ),

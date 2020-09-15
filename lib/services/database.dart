@@ -6,7 +6,6 @@ class DatabaseMethods {
         .collection("users")
         .where("name", isEqualTo: username)
         .getDocuments();
-    int k = 0;
   }
 
   getUserByEmail(String email) async {
@@ -104,7 +103,7 @@ class DatabaseMethods {
         .collection("challenges")
         .orderBy("time", descending: true)
         .getDocuments();
-    return snapshot;
+    return await snapshot;
   }
 
   deleteChallenge(String username1, String username2, documentId) async {
