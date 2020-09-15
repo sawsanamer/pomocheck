@@ -1,6 +1,7 @@
 import 'package:pomocheck/screens/my_progress_screen.dart';
 import 'package:pomocheck/screens/ongoing_challenges_screen.dart';
 import 'package:pomocheck/screens/pending_challenges_screen.dart';
+import 'package:pomocheck/screens/setDare.dart';
 import 'package:pomocheck/services/auth_methods.dart';
 import 'package:pomocheck/services/database.dart';
 import 'package:flutter/material.dart';
@@ -297,19 +298,36 @@ class ChallengeTile extends StatelessWidget {
                                   color: kDarkGrey,
                                   fontFamily: 'Roboto')),
                           ConstantsClass.myName == winner
-                              ? Container(
-                                  padding: EdgeInsets.all(15),
-                                  decoration: BoxDecoration(
-                                    borderRadius: BorderRadius.circular(10),
-                                    color: kRedCustom,
-                                  ),
-                                  child: Center(
-                                    child: Text(
-                                      "Set Dare",
-                                      style: TextStyle(
-                                          color: Colors.white,
-                                          fontFamily: 'Domine',
-                                          fontSize: 20),
+                              ? GestureDetector(
+                                  onTap: () {
+                                    Navigator.push(context,
+                                        MaterialPageRoute(builder: (context) {
+                                      return SetDare(
+                                        title: title,
+                                        scoreArray: scoreArray,
+                                        progress: progress,
+                                        myScore: myScore,
+                                        stateOfSubtasks: stateOfSubtasks,
+                                        winner: winner,
+                                        loser: loser,
+                                        loserState: loserState,
+                                      );
+                                    }));
+                                  },
+                                  child: Container(
+                                    padding: EdgeInsets.all(15),
+                                    decoration: BoxDecoration(
+                                      borderRadius: BorderRadius.circular(10),
+                                      color: kRedCustom,
+                                    ),
+                                    child: Center(
+                                      child: Text(
+                                        "Set Dare",
+                                        style: TextStyle(
+                                            color: Colors.white,
+                                            fontFamily: 'Domine',
+                                            fontSize: 20),
+                                      ),
                                     ),
                                   ),
                                 )

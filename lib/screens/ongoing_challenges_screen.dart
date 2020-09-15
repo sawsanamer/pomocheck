@@ -403,7 +403,7 @@ class ChallengeTile extends StatelessWidget {
                                   ),
                                 )
                         ],
-                      )
+                      ),
                     ],
                   ),
                 ],
