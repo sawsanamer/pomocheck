@@ -1,3 +1,4 @@
+import 'package:pomocheck/screens/finished_challenges_screen.dart';
 import 'package:pomocheck/screens/my_progress_screen.dart';
 import 'package:pomocheck/screens/pending_challenges_screen.dart';
 import 'package:pomocheck/services/auth_methods.dart';
@@ -208,12 +209,20 @@ class _OngoingChallengesScreenState extends State<OngoingChallengesScreen> {
                     ),
                   ),
                 ),
-                Text(
-                  "Finished",
-                  style: TextStyle(
-                    fontSize: 20,
-                    color: kDarkGrey,
-                    fontFamily: 'Domine',
+                GestureDetector(
+                  onTap: () {
+                    Navigator.pushReplacement(context,
+                        MaterialPageRoute(builder: (context) {
+                      return FinishedChallengesScreen();
+                    }));
+                  },
+                  child: Text(
+                    "Finished",
+                    style: TextStyle(
+                      fontSize: 20,
+                      color: kDarkGrey,
+                      fontFamily: 'Domine',
+                    ),
                   ),
                 )
               ],

@@ -1,3 +1,8 @@
+import 'package:pomocheck/screens/my_progress_screen.dart';
+import 'package:pomocheck/screens/ongoing_challenges_screen.dart';
+import 'package:pomocheck/screens/pending_challenges_screen.dart';
+import 'package:pomocheck/services/auth_methods.dart';
+import 'package:pomocheck/services/database.dart';
 import 'package:flutter/material.dart';
 import 'package:pomocheck/Cards/chores_category_card.dart';
 import 'package:pomocheck/Cards/fun_category_card.dart';
@@ -9,35 +14,28 @@ import 'package:pomocheck/Cards/work_category_card.dart';
 import 'package:pomocheck/components/bottomNAvigationBar.dart';
 import 'package:pomocheck/helper/authenticate.dart';
 import 'package:pomocheck/helper/constants_class.dart';
-import 'package:pomocheck/screens/finished_challenges_screen.dart';
-import 'package:pomocheck/screens/ongoing_challenges_screen.dart';
 import 'package:pomocheck/screens/read_more_screen.dart';
-import 'package:pomocheck/services/auth_methods.dart';
-import 'package:pomocheck/services/database.dart';
-
 import '../constants.dart';
 import '../constants.dart';
 import '../constants.dart';
 
-class PendingChallengesScreen extends StatefulWidget {
-  final String username;
-  final String challengeRoomId;
-  final documentId;
-
-  PendingChallengesScreen(
-      {this.username, this.challengeRoomId, this.documentId});
-
+class FinishedChallengesScreen extends StatefulWidget {
   @override
-  _PendingChallengesScreenState createState() =>
-      _PendingChallengesScreenState();
+  _FinishedChallengesScreenState createState() =>
+      _FinishedChallengesScreenState();
 }
 
-class _PendingChallengesScreenState extends State<PendingChallengesScreen> {
+class _FinishedChallengesScreenState extends State<FinishedChallengesScreen> {
   AuthMethods authMethods = AuthMethods();
   DatabaseMethods databaseMethods = DatabaseMethods();
   TextEditingController messageTextEditingController = TextEditingController();
 
   Stream challengeStream;
+  dynamic searchSnapshot;
+  List stateOfSubtasksForMyProgress;
+  List scoreArray;
+  int progress;
+  int myScore;
 
   Widget ChallengeList() {
     return StreamBuilder(
@@ -65,13 +63,17 @@ class _PendingChallengesScreenState extends State<PendingChallengesScreen> {
                       recievedBy:
                           snapshot.data.documents[index].data['recievedBy'],
                       state: snapshot.data.documents[index].data['state'],
-                      documentId: widget.documentId,
                       stateOfSubtasks: snapshot
                           .data.documents[index].data['stateOfSubtasks'],
                       scoreArray:
                           snapshot.data.documents[index].data['scoreArray'],
-                      myScore: 0,
-                      progress: 0);
+                      myScore: snapshot.data.documents[index].data['progress'],
+                      progress: snapshot.data.documents[index].data['myScore'],
+                      winner: snapshot.data.documents[index].data['winner'],
+                      loser: snapshot.data.documents[index].data['loser'],
+                      loserState:
+                          snapshot.data.documents[index].data['loserState'],
+                      dare: snapshot.data.documents[index].data['dare']);
                 },
                 itemCount: snapshot.data.documents.length,
               )
@@ -87,12 +89,8 @@ class _PendingChallengesScreenState extends State<PendingChallengesScreen> {
   }
 
   method() async {
-    //todo
-//    challengeStream = await databaseMethods
-//        .getConversationChallengeDetails(widget.challengeRoomId);
-
-    challengeStream =
-        await databaseMethods.getPendingChallengeDetails(ConstantsClass.myName);
+    challengeStream = await databaseMethods
+        .getFinishedChallengeDetails(ConstantsClass.myName);
     setState(() {});
   }
 
@@ -119,13 +117,21 @@ class _PendingChallengesScreenState extends State<PendingChallengesScreen> {
             child: Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: <Widget>[
-                Text(
-                  'Pending',
-                  style: TextStyle(
-                    fontSize: 20,
-                    fontFamily: 'Domine',
-                    color: kTurqoiseCustom,
+                GestureDetector(
+                  child: Text(
+                    'Pending',
+                    style: TextStyle(
+                      fontSize: 20,
+                      fontFamily: 'Domine',
+                      color: kDarkGrey,
+                    ),
                   ),
+                  onTap: () {
+                    Navigator.pushReplacement(context,
+                        MaterialPageRoute(builder: (context) {
+                      return PendingChallengesScreen();
+                    }));
+                  },
                 ),
                 GestureDetector(
                   onTap: () {
@@ -143,20 +149,12 @@ class _PendingChallengesScreenState extends State<PendingChallengesScreen> {
                     ),
                   ),
                 ),
-                GestureDetector(
-                  onTap: () {
-                    Navigator.pushReplacement(context,
-                        MaterialPageRoute(builder: (context) {
-                      return FinishedChallengesScreen();
-                    }));
-                  },
-                  child: Text(
-                    "Finished",
-                    style: TextStyle(
-                      fontSize: 20,
-                      color: kDarkGrey,
-                      fontFamily: 'Domine',
-                    ),
+                Text(
+                  "Finished",
+                  style: TextStyle(
+                    fontSize: 20,
+                    color: kTurqoiseCustom,
+                    fontFamily: 'Domine',
                   ),
                 )
               ],
@@ -165,20 +163,20 @@ class _PendingChallengesScreenState extends State<PendingChallengesScreen> {
           Row(children: <Widget>[
             Expanded(
                 child: Divider(
+              color: kDarkGrey,
+              height: 32,
+              thickness: 1,
+            )),
+            Expanded(
+                child: Divider(
+              color: kDarkGrey,
+              height: 32,
+              thickness: 1,
+            )),
+            Expanded(
+                child: Divider(
               color: kTurqoiseCustom,
-              height: 32,
               thickness: 3,
-            )),
-            Expanded(
-                child: Divider(
-              color: kDarkGrey,
-              height: 32,
-              thickness: 1,
-            )),
-            Expanded(
-                child: Divider(
-              color: kDarkGrey,
-              thickness: 1,
             )),
           ]),
           ChallengeList(),
@@ -204,6 +202,10 @@ class ChallengeTile extends StatelessWidget {
   final scoreArray;
   final myScore;
   final progress;
+  final String loser;
+  final String winner;
+  final String dare;
+  final String loserState;
 
   ChallengeTile(
       {this.title,
@@ -220,7 +222,11 @@ class ChallengeTile extends StatelessWidget {
       this.stateOfSubtasks,
       this.scoreArray,
       this.myScore,
-      this.progress});
+      this.progress,
+      this.loser,
+      this.winner,
+      this.dare,
+      this.loserState});
 
   Widget cardToReturn() {
     if (category != null) {
@@ -251,10 +257,10 @@ class ChallengeTile extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     getName() {
-      if (isSentByMe) {
-        return recievedBy;
-      } else
+      if (ConstantsClass.myName == recievedBy) {
         return sentBy;
+      } else
+        return recievedBy;
     }
 
     return Container(
@@ -290,56 +296,56 @@ class ChallengeTile extends StatelessWidget {
                                   fontSize: 24,
                                   color: kDarkGrey,
                                   fontFamily: 'Roboto')),
-                          isSentByMe
-                              ? Text(
-                                  "Sent By me",
-                                  style: TextStyle(
-                                      fontSize: 20,
-                                      color: kLightGrey,
-                                      fontFamily: 'Roboto'),
-                                )
-                              : GestureDetector(
-                                  onTap: () {
-                                    Navigator.push(
-                                        context,
-                                        MaterialPageRoute(
-                                            builder: (context) =>
-                                                ReadMoreScreen(
-                                                    title: title,
-                                                    category: category,
-                                                    isSentByMe: isSentByMe,
-                                                    recievedBy: recievedBy,
-                                                    sentBy: sentBy,
-                                                    state: state,
-                                                    subtasks: subtasks,
-                                                    time: time,
-                                                    turnOnPomodoro:
-                                                        turnOnPomodoro,
-                                                    stateOfSubtasks:
-                                                        stateOfSubtasks,
-                                                    turnOnStreak: turnOnStreak,
-                                                    documentId: documentId,
-                                                    scoreArray: scoreArray,
-                                                    myScore: myScore,
-                                                    progress: progress)));
-                                  },
-                                  child: Container(
-                                    padding: EdgeInsets.all(15),
-                                    decoration: BoxDecoration(
-                                      borderRadius: BorderRadius.circular(10),
-                                      color: kRedCustom,
-                                    ),
-                                    child: Center(
-                                      child: Text(
-                                        "Read More",
-                                        style: TextStyle(
-                                            color: Colors.white,
-                                            fontFamily: 'Domine',
-                                            fontSize: 20),
-                                      ),
+                          ConstantsClass.myName == winner
+                              ? Container(
+                                  padding: EdgeInsets.all(15),
+                                  decoration: BoxDecoration(
+                                    borderRadius: BorderRadius.circular(10),
+                                    color: kRedCustom,
+                                  ),
+                                  child: Center(
+                                    child: Text(
+                                      "Set Dare",
+                                      style: TextStyle(
+                                          color: Colors.white,
+                                          fontFamily: 'Domine',
+                                          fontSize: 20),
                                     ),
                                   ),
                                 )
+                              : loserState == "darePending"
+                                  ? Container(
+                                      padding: EdgeInsets.all(15),
+                                      decoration: BoxDecoration(
+                                        borderRadius: BorderRadius.circular(10),
+                                        color: kTurqoiseCustom.withOpacity(0.5),
+                                      ),
+                                      child: Center(
+                                        child: Text(
+                                          "Dare Pending",
+                                          style: TextStyle(
+                                              color: Colors.white,
+                                              fontFamily: 'Domine',
+                                              fontSize: 20),
+                                        ),
+                                      ),
+                                    )
+                                  : Container(
+                                      padding: EdgeInsets.all(15),
+                                      decoration: BoxDecoration(
+                                        borderRadius: BorderRadius.circular(10),
+                                        color: kTurqoiseCustom,
+                                      ),
+                                      child: Center(
+                                        child: Text(
+                                          "Take Dare",
+                                          style: TextStyle(
+                                              color: Colors.white,
+                                              fontFamily: 'Domine',
+                                              fontSize: 20),
+                                        ),
+                                      ),
+                                    )
                         ],
                       )
                     ],

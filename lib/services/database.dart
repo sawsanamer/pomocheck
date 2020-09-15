@@ -96,6 +96,18 @@ class DatabaseMethods {
     return snapshot;
   }
 
+  getFinishedChallengeDetails(String username) async {
+    Stream snapshot = await Firestore.instance
+        .collection("challeng")
+        .document(username)
+        .collection("challenges")
+        .where('state', isEqualTo: 'finished')
+        .orderBy("time", descending: true)
+        .snapshots();
+
+    return snapshot;
+  }
+
   getChallengeDetailsDocumentsByUsername(String username) async {
     QuerySnapshot snapshot = await Firestore.instance
         .collection("challeng")

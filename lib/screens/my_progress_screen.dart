@@ -1,9 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:pomocheck/helper/arrayTracker.dart';
 import 'package:pomocheck/helper/constants_class.dart';
+import 'package:pomocheck/screens/finished_challenges_screen.dart';
 import 'package:pomocheck/screens/read_more_screen.dart';
 import 'package:pomocheck/screens/their_progress_screen.dart';
 import 'package:pomocheck/services/database.dart';
-import 'package:rflutter_alert/rflutter_alert.dart';
 
 import '../constants.dart';
 
@@ -54,6 +55,10 @@ class _MyProgressScreenState extends State<MyProgressScreen> {
   int username2progress;
   List username2scoreArray;
   List username1stateOfSubtasks;
+  String winner;
+  String loser;
+  ArrayTracker arrayTracker = ArrayTracker();
+  bool isFinished;
 
   int newScore;
   @override
@@ -228,9 +233,10 @@ class _MyProgressScreenState extends State<MyProgressScreen> {
                                         username2 = widget.sentBy;
 
                                       //step 2: get their documents to compare
-//                                      theirProgressSnapshot = await databaseMethods
-//                                          .getChallengeDetailsDocumentsByUsername(
-//                                              username2);
+                                      searchSnapshotForUsername2 =
+                                          await databaseMethods
+                                              .getChallengeDetailsDocumentsByUsername(
+                                                  username2);
 
                                       //step 3: get their  username2stateOfSubtasks to compare what has
                                       //been checked
@@ -263,7 +269,7 @@ class _MyProgressScreenState extends State<MyProgressScreen> {
                                                   ConstantsClass.myName);
 
                                       searchSnapshotForLoggedInUser.documents
-                                          .forEach((document) {
+                                          .forEach((document) async {
                                         String documentId = document.documentID;
                                         String title = document.data['title'];
 
@@ -296,6 +302,97 @@ class _MyProgressScreenState extends State<MyProgressScreen> {
                                                   ConstantsClass.myName,
                                                   documentId,
                                                   onGoingChallengeDetailsMap);
+//==========================================
+                                          //check if  all checkboxes are ticked
+                                          isFinished = arrayTracker
+                                              .challengeIsFinishedforLoggedInUser(
+                                                  widget.stateOfSubtasks);
+
+                                          //get username2score
+                                          searchSnapshotForUsername2 =
+                                              await databaseMethods
+                                                  .getChallengeDetailsDocumentsByUsername(
+                                                      username2);
+
+                                          //step 3: get their  username2stateOfSubtasks to compare what has
+                                          //been checked
+                                          await searchSnapshotForUsername2
+                                              .documents
+                                              .forEach((document) async {
+                                            String title =
+                                                document.data['title'];
+                                            if (title == widget.title) {
+                                              username2MyScore = await document
+                                                  .data['myScore'];
+                                            }
+                                          });
+
+                                          if (isFinished) {
+                                            if (username2MyScore > newScore) {
+                                              winner = username2;
+                                              loser = ConstantsClass.myName;
+                                            } else {
+                                              loser = username2;
+                                              winner = ConstantsClass.myName;
+                                            }
+
+                                            searchSnapshotForLoggedInUser
+                                                .documents
+                                                .forEach((document) {
+                                              String documentId =
+                                                  document.documentID;
+                                              String title =
+                                                  document.data['title'];
+
+                                              if (title == widget.title) {
+                                                Map<String, dynamic>
+                                                    onGoingChallengeDetailsMap =
+                                                    {
+                                                  'category': widget.category,
+                                                  'title': widget.title,
+                                                  'turnOnPomodoro':
+                                                      widget.turnOnPomodoro,
+                                                  'turnOnStreak':
+                                                      widget.turnOnStreak,
+                                                  'subtasks': widget.subtasks,
+                                                  "time": DateTime.now()
+                                                      .millisecondsSinceEpoch,
+                                                  "sentBy": widget.sentBy,
+                                                  "recievedBy":
+                                                      widget.recievedBy,
+                                                  "state": 'finished',
+                                                  'documentId': documentId,
+                                                  'progress': 0,
+                                                  'isSentByMe':
+                                                      widget.isSentByMe,
+                                                  'stateOfSubtasks':
+                                                      widget.stateOfSubtasks,
+                                                  'scoreArray':
+                                                      widget.scoreArray,
+                                                  'myScore': widget.myScore,
+                                                  'progress': widget.progress,
+                                                  'winner': winner,
+                                                  'loser': loser,
+                                                  'loserState': 'darePending',
+                                                  'dare': null
+                                                };
+
+                                                databaseMethods.updateChallenge(
+                                                    widget.sentBy,
+                                                    widget.recievedBy,
+                                                    documentId,
+                                                    onGoingChallengeDetailsMap);
+
+                                                setState(() {});
+
+                                                Navigator.push(context,
+                                                    MaterialPageRoute(
+                                                        builder: (context) {
+                                                  return FinishedChallengesScreen();
+                                                }));
+                                              }
+                                            });
+                                          }
 
                                           setState(() {});
                                         }
