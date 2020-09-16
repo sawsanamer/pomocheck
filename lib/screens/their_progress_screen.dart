@@ -21,6 +21,8 @@ class TheirProgressScreen extends StatefulWidget {
   final scoreArray;
   final myScore;
   final progress;
+  final pomodoroIntervals;
+
   TheirProgressScreen(
       {this.title,
       this.isSentByMe,
@@ -36,7 +38,8 @@ class TheirProgressScreen extends StatefulWidget {
       this.stateOfSubtasks,
       this.scoreArray,
       this.myScore,
-      this.progress});
+      this.progress,
+      this.pomodoroIntervals});
   @override
   _TheirProgressScreenState createState() => _TheirProgressScreenState();
 }

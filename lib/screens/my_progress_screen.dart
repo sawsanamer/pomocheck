@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:pomocheck/helper/arrayTracker.dart';
 import 'package:pomocheck/helper/constants_class.dart';
+import 'package:pomocheck/screens/PomodoroTimer.dart';
 import 'package:pomocheck/screens/finished_challenges_screen.dart';
 import 'package:pomocheck/screens/read_more_screen.dart';
 import 'package:pomocheck/screens/their_progress_screen.dart';
@@ -26,6 +27,8 @@ class MyProgressScreen extends StatefulWidget {
   final scoreArray;
   final myScore;
   final progress;
+  final pomodoroPoints;
+  final pomodoroIntervals;
   MyProgressScreen(
       {this.title,
       this.isSentByMe,
@@ -41,7 +44,9 @@ class MyProgressScreen extends StatefulWidget {
       this.stateOfSubtasks,
       this.scoreArray,
       this.myScore,
-      this.progress});
+      this.progress,
+      this.pomodoroPoints,
+      this.pomodoroIntervals});
   @override
   _MyProgressScreenState createState() => _MyProgressScreenState();
 }
@@ -61,12 +66,19 @@ class _MyProgressScreenState extends State<MyProgressScreen> {
   String loser;
   ArrayTracker arrayTracker = ArrayTracker();
   bool isFinished;
+  int username2PomodoroScore;
+  int username2PomodoroIntervals;
 
   int newScore;
   @override
   void initState() {
-    newScore = widget.myScore;
+    method();
     super.initState();
+  }
+
+  method() async {
+    newScore = await calculateNewScore();
+    setState(() {});
   }
 
   calculateNewScore() async {
@@ -74,7 +86,10 @@ class _MyProgressScreenState extends State<MyProgressScreen> {
     for (int i = 0; i < widget.scoreArray.length; i++) {
       newScore += widget.scoreArray[i];
     }
-    return newScore;
+    if (widget.pomodoroPoints != null)
+      return (newScore + widget.pomodoroPoints);
+    else
+      return newScore;
   }
 
   @override
@@ -139,6 +154,10 @@ class _MyProgressScreenState extends State<MyProgressScreen> {
                           username2progress = await document.data['progress'];
                           username2scoreArray =
                               await document.data['scoreArray'];
+                          username2PomodoroScore =
+                              await document.data['pomodoroScore'];
+                          username2PomodoroIntervals =
+                              await document.data['pomodoroIntervals'];
 
                           Navigator.push(
                             context,
@@ -159,6 +178,7 @@ class _MyProgressScreenState extends State<MyProgressScreen> {
                                 myScore: username2MyScore,
                                 progress: username2progress,
                                 scoreArray: username2scoreArray,
+                                pomodoroIntervals: username2PomodoroIntervals,
                               ),
                             ),
                           );
@@ -326,11 +346,20 @@ class _MyProgressScreenState extends State<MyProgressScreen> {
                                             if (title == widget.title) {
                                               username2MyScore = await document
                                                   .data['myScore'];
+                                              username2PomodoroScore =
+                                                  await document
+                                                      .data['pomodoroScore'];
                                             }
                                           });
 
                                           if (isFinished) {
-                                            if (username2MyScore > newScore) {
+                                            if (username2PomodoroScore ==
+                                                null) {
+                                              username2PomodoroScore = 0;
+                                            }
+                                            if (username2MyScore +
+                                                    username2PomodoroScore >
+                                                newScore) {
                                               winner = username2;
                                               loser = ConstantsClass.myName;
                                             } else {
@@ -468,20 +497,44 @@ class _MyProgressScreenState extends State<MyProgressScreen> {
                       ],
                     ),
                   ),
-                  Container(
-                    margin: EdgeInsets.only(bottom: 20),
-                    padding: EdgeInsets.all(15),
-                    decoration: BoxDecoration(
-                      borderRadius: BorderRadius.circular(10),
-                      color: kRedCustom,
-                    ),
-                    child: Center(
-                      child: Text(
-                        "Start Pomodoro interval",
-                        style: TextStyle(
-                            color: Colors.white,
-                            fontFamily: 'Domine',
-                            fontSize: 24),
+                  GestureDetector(
+                    onTap: () {
+                      Navigator.push(context,
+                          MaterialPageRoute(builder: (context) {
+                        return PomodoroTimer(
+                          title: widget.title,
+                        );
+                      }));
+                    },
+                    child: Container(
+                      margin: EdgeInsets.only(bottom: 20),
+                      padding: EdgeInsets.all(15),
+                      decoration: BoxDecoration(
+                        borderRadius: BorderRadius.circular(10),
+                        color: kRedCustom,
+                      ),
+                      child: Center(
+                        child: Row(
+                          children: <Widget>[
+                            Container(
+                              width: 30,
+                              height: 30,
+                              decoration: BoxDecoration(
+                                  image: DecorationImage(
+                                      image: AssetImage('images/tomato.png'))),
+                            ),
+                            SizedBox(
+                              width: 10,
+                            ),
+                            Text(
+                              "Start Pomodoro interval",
+                              style: TextStyle(
+                                  color: Colors.white,
+                                  fontFamily: 'Domine',
+                                  fontSize: 24),
+                            ),
+                          ],
+                        ),
                       ),
                     ),
                   ),

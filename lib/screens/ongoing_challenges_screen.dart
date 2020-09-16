@@ -43,6 +43,7 @@ class _OngoingChallengesScreenState extends State<OngoingChallengesScreen> {
   List scoreArray;
   int progress;
   int myScore;
+  int pomodoroScore;
 
   Widget ChallengeList() {
     return StreamBuilder(
@@ -70,6 +71,7 @@ class _OngoingChallengesScreenState extends State<OngoingChallengesScreen> {
                           scoreArray = await document.data['scoreArray'];
                           myScore = await document.data['myScore'];
                           progress = await document.data['progress'];
+                          pomodoroScore = await document.data['pomodoroScore'];
 
                           print(title);
                           print("insidee");
@@ -104,36 +106,39 @@ class _OngoingChallengesScreenState extends State<OngoingChallengesScreen> {
                             scoreArray: scoreArray,
                             myScore: myScore,
                             progress: progress,
-                            stateOfSubtasks: stateOfSubtasksForMyProgress);
+                            stateOfSubtasks: stateOfSubtasksForMyProgress,
+                            pomodoroPoints: pomodoroScore,
+                            pomodoroIntervals: pomodoroScore);
                       }));
                     },
                     child: ChallengeTile(
-                        title: snapshot.data.documents[index].data['title'],
-                        category:
-                            snapshot.data.documents[index].data['category'],
-                        sentBy: snapshot.data.documents[index].data['sentBy'],
-                        subtasks:
-                            snapshot.data.documents[index].data['subtasks'],
-                        time: snapshot.data.documents[index].data['time'],
-                        turnOnPomodoro: snapshot
-                            .data.documents[index].data['turnOnPomodoro'],
-                        turnOnStreak:
-                            snapshot.data.documents[index].data['turnOnStreak'],
-                        isSentByMe:
-                            snapshot.data.documents[index].data['sentBy'] ==
-                                ConstantsClass.myName,
-                        recievedBy:
-                            snapshot.data.documents[index].data['recievedBy'],
-                        state: snapshot.data.documents[index].data['state'],
-                        documentId: widget.documentId,
-                        stateOfSubtasks: snapshot
-                            .data.documents[index].data['stateOfSubtasks'],
-                        scoreArray:
-                            snapshot.data.documents[index].data['scoreArray'],
-                        myScore:
-                            snapshot.data.documents[index].data['progress'],
-                        progress:
-                            snapshot.data.documents[index].data['myScore']),
+                      title: snapshot.data.documents[index].data['title'],
+                      category: snapshot.data.documents[index].data['category'],
+                      sentBy: snapshot.data.documents[index].data['sentBy'],
+                      subtasks: snapshot.data.documents[index].data['subtasks'],
+                      time: snapshot.data.documents[index].data['time'],
+                      turnOnPomodoro:
+                          snapshot.data.documents[index].data['turnOnPomodoro'],
+                      turnOnStreak:
+                          snapshot.data.documents[index].data['turnOnStreak'],
+                      isSentByMe:
+                          snapshot.data.documents[index].data['sentBy'] ==
+                              ConstantsClass.myName,
+                      recievedBy:
+                          snapshot.data.documents[index].data['recievedBy'],
+                      state: snapshot.data.documents[index].data['state'],
+                      documentId: widget.documentId,
+                      stateOfSubtasks: snapshot
+                          .data.documents[index].data['stateOfSubtasks'],
+                      scoreArray:
+                          snapshot.data.documents[index].data['scoreArray'],
+                      myScore: snapshot.data.documents[index].data['myScore'],
+                      progress: snapshot.data.documents[index].data['progress'],
+                      pomodoroPoints:
+                          snapshot.data.documents[index].data['pomodoroPoints'],
+                      pomodoroIntervals: snapshot
+                          .data.documents[index].data['pomodoroIntervals'],
+                    ),
                   );
                 },
                 itemCount: snapshot.data.documents.length,
@@ -270,6 +275,8 @@ class ChallengeTile extends StatelessWidget {
   final scoreArray;
   final myScore;
   final progress;
+  final pomodoroPoints;
+  final pomodoroIntervals;
 
   ChallengeTile(
       {this.title,
@@ -286,7 +293,9 @@ class ChallengeTile extends StatelessWidget {
       this.stateOfSubtasks,
       this.scoreArray,
       this.myScore,
-      this.progress});
+      this.progress,
+      this.pomodoroPoints,
+      this.pomodoroIntervals});
 
   Widget cardToReturn() {
     if (category != null) {
