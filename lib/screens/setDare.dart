@@ -1,24 +1,13 @@
 import 'package:flutter/material.dart';
+import 'package:pomocheck/helper/constants_class.dart';
 import 'package:pomocheck/services/database.dart';
 
 import '../constants.dart';
 
 class SetDare extends StatefulWidget {
   final String title;
-  final bool isSentByMe;
-  final String sentBy;
-  final List subtasks;
-  final int time;
-  final bool turnOnPomodoro;
-  final bool turnOnStreak;
   final String category;
-  final String recievedBy;
   final String state;
-  final documentId;
-  final stateOfSubtasks;
-  final scoreArray;
-  final myScore;
-  final progress;
   final String loser;
   final String winner;
   final String dare;
@@ -26,20 +15,8 @@ class SetDare extends StatefulWidget {
 
   const SetDare(
       {this.title,
-      this.isSentByMe,
-      this.sentBy,
-      this.subtasks,
-      this.time,
-      this.turnOnPomodoro,
-      this.turnOnStreak,
       this.category,
-      this.recievedBy,
       this.state,
-      this.documentId,
-      this.stateOfSubtasks,
-      this.scoreArray,
-      this.myScore,
-      this.progress,
       this.loser,
       this.winner,
       this.dare,
@@ -50,6 +27,8 @@ class SetDare extends StatefulWidget {
 
 class _SetDareState extends State<SetDare> {
   DatabaseMethods databaseMethods = DatabaseMethods();
+  dynamic searchSnapshot;
+  TextEditingController dareTextEditingController = TextEditingController();
 
   @override
   Widget build(BuildContext context) {
@@ -132,6 +111,7 @@ class _SetDareState extends State<SetDare> {
                     Container(
                       margin: EdgeInsets.only(top: 20),
                       child: TextField(
+                        controller: dareTextEditingController,
                         keyboardType: TextInputType.multiline,
                         maxLines: 10,
                         style: TextStyle(fontSize: 20),
@@ -171,9 +151,37 @@ class _SetDareState extends State<SetDare> {
                 ),
                 child: Center(
                   child: GestureDetector(
-                    onTap: () {
-                      databaseMethods.updateChallenge(
-                          widget, documentId, onGoingChallengeDetailsMap);
+                    onTap: () async {
+                      searchSnapshot = await databaseMethods
+                          .getChallengeDetailsDocumentsByUsername(
+                              ConstantsClass.myName);
+
+                      searchSnapshot.documents.forEach((document) {
+                        String documentId = document.documentID;
+                        String title = document.data['title'];
+
+                        if (title == widget.title) {
+                          Map<String, dynamic> onGoingChallengeDetailsMap = {
+                            'category': widget.category,
+                            'title': widget.title,
+                            "state": 'finished',
+                            'winner': widget.winner,
+                            'loser': widget.loser,
+                            'loserState': 'dareSent',
+                            'dare': dareTextEditingController.text
+                          };
+
+                          databaseMethods.updateChallenge(
+                              widget.winner,
+                              widget.loser,
+                              documentId,
+                              onGoingChallengeDetailsMap);
+
+                          setState(() {});
+
+                          Navigator.pop(context);
+                        }
+                      });
                     },
                     child: Text(
                       "Set Dare",

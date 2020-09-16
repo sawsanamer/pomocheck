@@ -255,6 +255,95 @@ class ChallengeTile extends StatelessWidget {
     return UnspecifiedCategoryCard();
   }
 
+  Widget buttonToshow(context) {
+    if (ConstantsClass.myName == loser) {
+      if (loserState == 'darePending') {
+        return Container(
+          padding: EdgeInsets.all(15),
+          decoration: BoxDecoration(
+            borderRadius: BorderRadius.circular(10),
+            color: kTurqoiseCustom.withOpacity(0.5),
+          ),
+          child: Center(
+            child: Text(
+              "Dare Pending",
+              style: TextStyle(
+                  color: Colors.white, fontFamily: 'Domine', fontSize: 20),
+            ),
+          ),
+        );
+      } else if (loserState == 'dareSent') {
+        return GestureDetector(
+          onTap: () {},
+          child: Container(
+            padding: EdgeInsets.all(15),
+            decoration: BoxDecoration(
+              borderRadius: BorderRadius.circular(10),
+              color: kTurqoiseCustom,
+            ),
+            child: Center(
+              child: Text(
+                "Take Dare",
+                style: TextStyle(
+                    color: Colors.white, fontFamily: 'Domine', fontSize: 20),
+              ),
+            ),
+          ),
+        );
+      }
+    } else if (ConstantsClass.myName == winner) {
+      print("ASFASFDdsafafsssssssssssssss");
+      print(winner);
+      print(loserState);
+      if (loserState == 'darePending') {
+        return GestureDetector(
+          onTap: () {
+            Navigator.push(context, MaterialPageRoute(builder: (context) {
+              return SetDare(
+                title: title,
+                winner: winner,
+                loser: loser,
+                loserState: loserState,
+                state: 'finished',
+                category: category,
+                dare: '',
+              );
+            }));
+          },
+          child: Container(
+            padding: EdgeInsets.all(15),
+            decoration: BoxDecoration(
+              borderRadius: BorderRadius.circular(10),
+              color: kRedCustom,
+            ),
+            child: Center(
+              child: Text(
+                "Set dare",
+                style: TextStyle(
+                    color: Colors.white, fontFamily: 'Domine', fontSize: 20),
+              ),
+            ),
+          ),
+        );
+      } else if (loserState == 'dareSent') {
+        return Container(
+          padding: EdgeInsets.all(15),
+          decoration: BoxDecoration(
+            borderRadius: BorderRadius.circular(10),
+            color: kRedCustom.withOpacity(0.4),
+          ),
+          child: Center(
+            child: Text(
+              "Dare Delivered",
+              style: TextStyle(
+                  color: Colors.white, fontFamily: 'Domine', fontSize: 20),
+            ),
+          ),
+        );
+      }
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
     getName() {
@@ -297,73 +386,7 @@ class ChallengeTile extends StatelessWidget {
                                   fontSize: 24,
                                   color: kDarkGrey,
                                   fontFamily: 'Roboto')),
-                          ConstantsClass.myName == winner
-                              ? GestureDetector(
-                                  onTap: () {
-                                    Navigator.push(context,
-                                        MaterialPageRoute(builder: (context) {
-                                      return SetDare(
-                                        title: title,
-                                        scoreArray: scoreArray,
-                                        progress: progress,
-                                        myScore: myScore,
-                                        stateOfSubtasks: stateOfSubtasks,
-                                        winner: winner,
-                                        loser: loser,
-                                        loserState: loserState,
-                                      );
-                                    }));
-                                  },
-                                  child: Container(
-                                    padding: EdgeInsets.all(15),
-                                    decoration: BoxDecoration(
-                                      borderRadius: BorderRadius.circular(10),
-                                      color: kRedCustom,
-                                    ),
-                                    child: Center(
-                                      child: Text(
-                                        "Set Dare",
-                                        style: TextStyle(
-                                            color: Colors.white,
-                                            fontFamily: 'Domine',
-                                            fontSize: 20),
-                                      ),
-                                    ),
-                                  ),
-                                )
-                              : loserState == "darePending"
-                                  ? Container(
-                                      padding: EdgeInsets.all(15),
-                                      decoration: BoxDecoration(
-                                        borderRadius: BorderRadius.circular(10),
-                                        color: kTurqoiseCustom.withOpacity(0.5),
-                                      ),
-                                      child: Center(
-                                        child: Text(
-                                          "Dare Pending",
-                                          style: TextStyle(
-                                              color: Colors.white,
-                                              fontFamily: 'Domine',
-                                              fontSize: 20),
-                                        ),
-                                      ),
-                                    )
-                                  : Container(
-                                      padding: EdgeInsets.all(15),
-                                      decoration: BoxDecoration(
-                                        borderRadius: BorderRadius.circular(10),
-                                        color: kTurqoiseCustom,
-                                      ),
-                                      child: Center(
-                                        child: Text(
-                                          "Take Dare",
-                                          style: TextStyle(
-                                              color: Colors.white,
-                                              fontFamily: 'Domine',
-                                              fontSize: 20),
-                                        ),
-                                      ),
-                                    )
+                          buttonToshow(context),
                         ],
                       )
                     ],
