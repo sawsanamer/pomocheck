@@ -133,7 +133,7 @@ class _MyProgressScreenState extends State<MyProgressScreen> {
                   Text(
                     'My Progress',
                     style: TextStyle(
-                      fontSize: 24,
+                      fontSize: 16,
                       fontFamily: 'Domine',
                       color: kTurqoiseCustom,
                     ),
@@ -197,7 +197,7 @@ class _MyProgressScreenState extends State<MyProgressScreen> {
                     child: Text(
                       "Their Progress",
                       style: TextStyle(
-                        fontSize: 24,
+                        fontSize: 16,
                         color: kDarkGrey,
                         fontFamily: 'Domine',
                       ),
@@ -491,7 +491,7 @@ class _MyProgressScreenState extends State<MyProgressScreen> {
                                 'Number of Pomodoro intervals Completed: ' +
                                     returnNumberOfIntervals(),
                                 style: TextStyle(
-                                  fontSize: 16,
+                                  fontSize: 12,
                                   fontFamily: 'Roboto',
                                   color: Colors.black,
                                 ),
@@ -546,7 +546,7 @@ class _MyProgressScreenState extends State<MyProgressScreen> {
                                     style: TextStyle(
                                         color: Colors.white,
                                         fontFamily: 'Domine',
-                                        fontSize: 24),
+                                        fontSize: 16),
                                   ),
                                 ],
                               ),

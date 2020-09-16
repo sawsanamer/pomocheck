@@ -268,7 +268,7 @@ class ChallengeTile extends StatelessWidget {
             }));
           },
           child: Container(
-            width: 200,
+            width: 150,
             padding: EdgeInsets.all(15),
             decoration: BoxDecoration(
               borderRadius: BorderRadius.circular(10),
@@ -298,7 +298,7 @@ class ChallengeTile extends StatelessWidget {
             }));
           },
           child: Container(
-            width: 200,
+            width: 150,
             padding: EdgeInsets.all(15),
             decoration: BoxDecoration(
               borderRadius: BorderRadius.circular(10),
@@ -334,7 +334,7 @@ class ChallengeTile extends StatelessWidget {
             }));
           },
           child: Container(
-            width: 200,
+            width: 150,
             padding: EdgeInsets.all(15),
             decoration: BoxDecoration(
               borderRadius: BorderRadius.circular(10),
@@ -357,7 +357,7 @@ class ChallengeTile extends StatelessWidget {
             }));
           },
           child: Container(
-            width: 200,
+            width: 150,
             padding: EdgeInsets.all(15),
             decoration: BoxDecoration(
               borderRadius: BorderRadius.circular(10),
@@ -415,7 +415,7 @@ class ChallengeTile extends StatelessWidget {
                         children: <Widget>[
                           Text(title,
                               style: TextStyle(
-                                  fontSize: 24,
+                                  fontSize: 14,
                                   color: Colors.black,
                                   fontFamily: 'Roboto')),
                           SizedBox(

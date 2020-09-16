@@ -89,7 +89,7 @@ class _SignInScreenState extends State<SignInScreen> {
                                 color: Colors.white,
                                 fontFamily: 'Domine',
                                 fontWeight: FontWeight.w400,
-                                fontSize: 60),
+                                fontSize: 55),
                           ),
                         ],
                       ),

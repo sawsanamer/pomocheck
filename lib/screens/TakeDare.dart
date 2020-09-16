@@ -102,51 +102,36 @@ class _TakeDareState extends State<TakeDare> {
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: <Widget>[
-                  Container(
-                    padding: EdgeInsets.all(30),
-                    width: 160,
-                    decoration: BoxDecoration(
-                      borderRadius: BorderRadius.circular(5),
-                      color: kTurqoiseCustom,
-                    ),
-                    child: Center(
-                      child: Text(
-                        "Forfeit",
-                        style: TextStyle(
-                            color: Colors.white,
-                            fontFamily: 'Domine',
-                            fontSize: 24),
-                      ),
-                    ),
-                  ),
                   SizedBox(
                     width: 40,
                   ),
-                  Container(
-                    width: 160,
-                    padding: EdgeInsets.all(30),
-                    decoration: BoxDecoration(
-                      borderRadius: BorderRadius.circular(5),
-                      color: kRedCustom,
-                    ),
-                    child: Center(
-                      child: Row(
-                        children: <Widget>[
-                          Icon(
-                            Icons.camera_alt,
-                            color: Colors.white,
-                          ),
-                          SizedBox(
-                            width: 10,
-                          ),
-                          Text(
-                            "Film",
-                            style: TextStyle(
-                                color: Colors.white,
-                                fontFamily: 'Domine',
-                                fontSize: 24),
-                          ),
-                        ],
+                  Center(
+                    child: Container(
+                      width: 180,
+                      padding: EdgeInsets.all(30),
+                      decoration: BoxDecoration(
+                        borderRadius: BorderRadius.circular(5),
+                        color: kRedCustom,
+                      ),
+                      child: Center(
+                        child: Row(
+                          children: <Widget>[
+                            Icon(
+                              Icons.camera_alt,
+                              color: Colors.white,
+                            ),
+                            SizedBox(
+                              width: 10,
+                            ),
+                            Text(
+                              "Film",
+                              style: TextStyle(
+                                  color: Colors.white,
+                                  fontFamily: 'Domine',
+                                  fontSize: 24),
+                            ),
+                          ],
+                        ),
                       ),
                     ),
                   ),

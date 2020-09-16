@@ -110,10 +110,21 @@ class ChatRoomTile extends StatelessWidget {
               child: Row(
                 crossAxisAlignment: CrossAxisAlignment.center,
                 children: <Widget>[
-                  CircleAvatar(
-                    backgroundImage: NetworkImage(
-                        'https://miro.medium.com/max/2560/1*gBQxShAkxBp_YPb14CN0Nw.jpeg'),
-                    radius: 40,
+                  Container(
+                    decoration: BoxDecoration(
+                      shape: BoxShape.circle,
+                      color: kTurqoiseCustom,
+                    ),
+                    padding: EdgeInsets.all(20),
+                    child: Center(
+                      child: username == null
+                          ? Container()
+                          : Text(
+                              username.substring(0, 1).toUpperCase(),
+                              style:
+                                  TextStyle(fontSize: 32, color: Colors.white),
+                            ),
+                    ),
                   ),
                   SizedBox(
                     width: 10,

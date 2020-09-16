@@ -58,7 +58,7 @@ class _ProfileAchievmentsPageState extends State<ProfileAchievmentsPage> {
                 padding: EdgeInsets.only(top: 10),
                 child: CircleAvatar(
                   backgroundImage: NetworkImage(
-                      'https://miro.medium.com/max/2560/1*gBQxShAkxBp_YPb14CN0Nw.jpeg'),
+                      'https://64.media.tumblr.com/08123db043d165b509ca1c9f47d20b3c/b100b0378deda43b-d2/s640x960/862dbeac129631d1df5d513908707781c01b77b7.png'),
                   radius: 80,
                 ),
               ),

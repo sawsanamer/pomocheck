@@ -36,6 +36,7 @@ class _pomocheckState extends State<pomocheck> {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
+      debugShowCheckedModeBanner: false,
       home: userIsLoggedIn != null
           ? userIsLoggedIn ? ChatRoomsScreen() : Authenticate()
           : Container(

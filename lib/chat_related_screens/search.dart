@@ -48,10 +48,18 @@ class _SearchScreenState extends State<SearchScreen> {
       margin: EdgeInsets.symmetric(horizontal: 20),
       child: Row(
         children: <Widget>[
-          CircleAvatar(
-            backgroundImage: NetworkImage(
-                'https://miro.medium.com/max/2560/1*gBQxShAkxBp_YPb14CN0Nw.jpeg'),
-            radius: 25,
+          Container(
+            decoration: BoxDecoration(
+              shape: BoxShape.circle,
+              color: kTurqoiseCustom,
+            ),
+            padding: EdgeInsets.all(20),
+            child: Center(
+              child: Text(
+                username.substring(0, 1).toUpperCase(),
+                style: TextStyle(fontSize: 32, color: Colors.white),
+              ),
+            ),
           ),
           SizedBox(
             width: 10,

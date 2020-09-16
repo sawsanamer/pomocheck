@@ -90,10 +90,18 @@ class _ConversationScreenState extends State<ConversationScreen> {
           title: Row(
             mainAxisAlignment: MainAxisAlignment.start,
             children: <Widget>[
-              CircleAvatar(
-                backgroundImage: NetworkImage(
-                    'https://miro.medium.com/max/2560/1*gBQxShAkxBp_YPb14CN0Nw.jpeg'),
-                radius: 25,
+              Container(
+                decoration: BoxDecoration(
+                  shape: BoxShape.circle,
+                  color: kTurqoiseCustom,
+                ),
+                padding: EdgeInsets.all(20),
+                child: Center(
+                  child: Text(
+                    widget.username.substring(0, 1).toUpperCase(),
+                    style: TextStyle(fontSize: 25, color: Colors.white),
+                  ),
+                ),
               ),
               SizedBox(
                 width: 10,

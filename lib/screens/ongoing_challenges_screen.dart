@@ -377,61 +377,63 @@ class ChallengeTile extends StatelessWidget {
                       SizedBox(
                         width: 20,
                       ),
-                      Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                        children: <Widget>[
-                          Text(title,
-                              style: TextStyle(
-                                  fontSize: 24,
-                                  color: Colors.black,
-                                  fontFamily: 'Roboto')),
-                          Row(
-                            children: <Widget>[
-                              Container(
-                                height: 40,
-                                width: 200,
-                                child: FAProgressBar(
-                                  borderRadius: 20,
-                                  progressColor: kYellowCustom,
-                                  currentValue: trueElements(),
-                                  displayText: '%',
-                                  maxValue: stateOfSubtasks.length,
-                                  backgroundColor: Colors.grey.shade300,
-                                ),
-                              ),
-                              SizedBox(
-                                width: 10,
-                              ),
-                              Container(
-                                margin: EdgeInsets.only(right: 10),
-                                child: Text(
-                                  returnPercentage(),
-                                  style: TextStyle(
-                                      color: Colors.black, fontSize: 16),
-                                ),
-                              ),
-                            ],
-                          ),
-                          Container(
-                            margin: EdgeInsets.only(top: 5),
-                            width: 200,
-                            padding: EdgeInsets.all(10),
-                            decoration: BoxDecoration(
-                              borderRadius: BorderRadius.circular(10),
-                              color: kTurqoiseCustom,
-                            ),
-                            child: Center(
-                              child: Text(
-                                "See Progress",
+                      Flexible(
+                        child: Column(
+                          crossAxisAlignment: CrossAxisAlignment.stretch,
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                          children: <Widget>[
+                            Text(title,
                                 style: TextStyle(
-                                    color: Colors.white,
-                                    fontFamily: 'Domine',
-                                    fontSize: 20),
+                                    fontSize: 14,
+                                    color: Colors.black,
+                                    fontFamily: 'Roboto')),
+                            Row(
+                              children: <Widget>[
+                                Container(
+                                  height: 40,
+                                  width: 125,
+                                  child: FAProgressBar(
+                                    borderRadius: 20,
+                                    progressColor: kYellowCustom,
+                                    currentValue: trueElements(),
+                                    displayText: '%',
+                                    maxValue: stateOfSubtasks.length,
+                                    backgroundColor: Colors.grey.shade300,
+                                  ),
+                                ),
+                                SizedBox(
+                                  width: 10,
+                                ),
+                                Container(
+                                  margin: EdgeInsets.only(right: 10),
+                                  child: Text(
+                                    returnPercentage(),
+                                    style: TextStyle(
+                                        color: Colors.black, fontSize: 14),
+                                  ),
+                                ),
+                              ],
+                            ),
+                            Container(
+                              margin: EdgeInsets.only(top: 5),
+                              width: 200,
+                              padding: EdgeInsets.all(10),
+                              decoration: BoxDecoration(
+                                borderRadius: BorderRadius.circular(10),
+                                color: kTurqoiseCustom,
+                              ),
+                              child: Center(
+                                child: Text(
+                                  "See Progress",
+                                  style: TextStyle(
+                                      color: Colors.white,
+                                      fontFamily: 'Domine',
+                                      fontSize: 20),
+                                ),
                               ),
                             ),
-                          ),
-                        ],
+                          ],
+                        ),
                       ),
                     ],
                   ),

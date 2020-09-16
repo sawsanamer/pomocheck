@@ -80,7 +80,7 @@ class _ReadMoreScreen extends State<ReadMoreScreen> {
           child: Text(
             "Challenge Information",
             style: TextStyle(
-                color: Colors.black, fontFamily: 'Domine', fontSize: 24),
+                color: Colors.black, fontFamily: 'Domine', fontSize: 20),
           ),
         ),
       ),
@@ -271,7 +271,7 @@ class _ReadMoreScreen extends State<ReadMoreScreen> {
                       },
                       child: Container(
                         padding:
-                            EdgeInsets.symmetric(vertical: 20, horizontal: 40),
+                            EdgeInsets.symmetric(vertical: 20, horizontal: 20),
                         margin: EdgeInsets.symmetric(vertical: 20),
                         decoration: BoxDecoration(
                           borderRadius: BorderRadius.circular(5),
@@ -315,7 +315,7 @@ class _ReadMoreScreen extends State<ReadMoreScreen> {
                       },
                       child: Container(
                         padding:
-                            EdgeInsets.symmetric(horizontal: 40, vertical: 20),
+                            EdgeInsets.symmetric(horizontal: 20, vertical: 20),
                         decoration: BoxDecoration(
                           borderRadius: BorderRadius.circular(5),
                           color: kRedCustom,

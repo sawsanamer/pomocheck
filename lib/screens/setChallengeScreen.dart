@@ -79,7 +79,7 @@ class _SetChallengeScreenState extends State<SetChallengeScreen> {
         backgroundColor: Colors.white,
         title: Center(
           child: Text(
-            "Set A Challenge",
+            "Set Challenge",
             style: TextStyle(
                 color: Colors.black, fontFamily: 'Domine', fontSize: 32),
           ),

@@ -287,7 +287,7 @@ class ChallengeTile extends StatelessWidget {
                         children: <Widget>[
                           Text(title,
                               style: TextStyle(
-                                  fontSize: 24,
+                                  fontSize: 14,
                                   color: Colors.black,
                                   fontFamily: 'Roboto')),
                           SizedBox(

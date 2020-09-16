@@ -140,7 +140,7 @@ class _State extends State<PomodoroTimer> {
                 child: Text(
                   "Pomodoro Timer",
                   style: TextStyle(
-                      color: kDarkGrey, fontFamily: 'Domine', fontSize: 40),
+                      color: kDarkGrey, fontFamily: 'Domine', fontSize: 32),
                 ),
               ),
               SizedBox(
@@ -169,6 +169,7 @@ class _State extends State<PomodoroTimer> {
                     ? null
                     : () {
                         wasPressed = true;
+
                         _StartTimer();
                       },
                 child: Container(

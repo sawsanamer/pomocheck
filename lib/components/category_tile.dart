@@ -8,6 +8,7 @@ class CategoryTile extends StatefulWidget {
   CategoryTile({this.icon, this.title, this.containerColor, this.iconColor});
 
   @override
+  @override
   _CategoryTileState createState() => _CategoryTileState();
 }
 
@@ -33,7 +34,7 @@ class _CategoryTileState extends State<CategoryTile> {
                 border: Border.all(width: 1, color: Colors.black87)),
             child: Icon(
               widget.icon,
-              size: 85,
+              size: 75,
               color: widget.iconColor,
             ),
           ),
