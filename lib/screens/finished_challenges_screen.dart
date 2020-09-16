@@ -1,7 +1,10 @@
+import 'package:pomocheck/screens/TakeDare.dart';
 import 'package:pomocheck/screens/my_progress_screen.dart';
 import 'package:pomocheck/screens/ongoing_challenges_screen.dart';
 import 'package:pomocheck/screens/pending_challenges_screen.dart';
 import 'package:pomocheck/screens/setDare.dart';
+import 'package:pomocheck/screens/you_lost.dart';
+import 'package:pomocheck/screens/you_won.dart';
 import 'package:pomocheck/services/auth_methods.dart';
 import 'package:pomocheck/services/database.dart';
 import 'package:flutter/material.dart';
@@ -258,23 +261,41 @@ class ChallengeTile extends StatelessWidget {
   Widget buttonToshow(context) {
     if (ConstantsClass.myName == loser) {
       if (loserState == 'darePending') {
-        return Container(
-          padding: EdgeInsets.all(15),
-          decoration: BoxDecoration(
-            borderRadius: BorderRadius.circular(10),
-            color: kTurqoiseCustom.withOpacity(0.5),
-          ),
-          child: Center(
-            child: Text(
-              "Dare Pending",
-              style: TextStyle(
-                  color: Colors.white, fontFamily: 'Domine', fontSize: 20),
+        return GestureDetector(
+          onTap: () {
+            Navigator.push(context, MaterialPageRoute(builder: (context) {
+              return YouLost(buttonText: "Back");
+            }));
+          },
+          child: Container(
+            padding: EdgeInsets.all(15),
+            decoration: BoxDecoration(
+              borderRadius: BorderRadius.circular(10),
+              color: kTurqoiseCustom.withOpacity(0.5),
+            ),
+            child: Center(
+              child: Text(
+                "Dare Pending",
+                style: TextStyle(
+                    color: Colors.white, fontFamily: 'Domine', fontSize: 20),
+              ),
             ),
           ),
         );
       } else if (loserState == 'dareSent') {
         return GestureDetector(
-          onTap: () {},
+          onTap: () {
+            Navigator.push(context, MaterialPageRoute(builder: (context) {
+              return TakeDare(
+                title: title,
+                winner: winner,
+                loser: loser,
+                loserState: loserState,
+                state: 'finished',
+                category: category,
+              );
+            }));
+          },
           child: Container(
             padding: EdgeInsets.all(15),
             decoration: BoxDecoration(
@@ -332,11 +353,18 @@ class ChallengeTile extends StatelessWidget {
             borderRadius: BorderRadius.circular(10),
             color: kRedCustom.withOpacity(0.4),
           ),
-          child: Center(
-            child: Text(
-              "Dare Delivered",
-              style: TextStyle(
-                  color: Colors.white, fontFamily: 'Domine', fontSize: 20),
+          child: GestureDetector(
+            onTap: () {
+              Navigator.push(context, MaterialPageRoute(builder: (context) {
+                return YouWon(buttonText: "Back");
+              }));
+            },
+            child: Center(
+              child: Text(
+                "Dare Delivered",
+                style: TextStyle(
+                    color: Colors.white, fontFamily: 'Domine', fontSize: 20),
+              ),
             ),
           ),
         );

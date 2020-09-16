@@ -1,8 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:pomocheck/chat_related_screens/chatrooms.dart';
 import 'package:pomocheck/helper/helperfunctions.dart';
+import 'package:pomocheck/screens/ongoing_challenges_screen.dart';
 import 'package:pomocheck/screens/profile_achievements_page.dart';
 import 'package:pomocheck/chat_related_screens/signin.dart';
+import 'package:pomocheck/screens/you_lost.dart';
+import 'package:pomocheck/screens/you_won.dart';
 
 import 'chat_related_screens/signup.dart';
 import 'helper/authenticate.dart';

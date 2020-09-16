@@ -62,6 +62,13 @@ flutter:
   # To add assets to your application, add an assets section, like this:
   assets:
     - images/swords.svg
+    - images/trophy.png
+    - images/loser.png
+    - images/tomato.png
+    - images/thunder.png
+    - images/lightning.png
+
+
 
   fonts:
     - family: Swords

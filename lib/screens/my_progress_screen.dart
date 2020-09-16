@@ -4,6 +4,8 @@ import 'package:pomocheck/helper/constants_class.dart';
 import 'package:pomocheck/screens/finished_challenges_screen.dart';
 import 'package:pomocheck/screens/read_more_screen.dart';
 import 'package:pomocheck/screens/their_progress_screen.dart';
+import 'package:pomocheck/screens/you_lost.dart';
+import 'package:pomocheck/screens/you_won.dart';
 import 'package:pomocheck/services/database.dart';
 
 import '../constants.dart';
@@ -385,11 +387,20 @@ class _MyProgressScreenState extends State<MyProgressScreen> {
 
                                                 setState(() {});
 
-                                                Navigator.push(context,
-                                                    MaterialPageRoute(
-                                                        builder: (context) {
-                                                  return FinishedChallengesScreen();
-                                                }));
+                                                if (winner ==
+                                                    ConstantsClass.myName) {
+                                                  Navigator.push(context,
+                                                      MaterialPageRoute(
+                                                          builder: (context) {
+                                                    return YouWon();
+                                                  }));
+                                                } else {
+                                                  Navigator.push(context,
+                                                      MaterialPageRoute(
+                                                          builder: (context) {
+                                                    return YouLost();
+                                                  }));
+                                                }
                                               }
                                             });
                                           }
@@ -413,23 +424,48 @@ class _MyProgressScreenState extends State<MyProgressScreen> {
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: <Widget>[
-                  Text(
-                    'Points gained: ' + newScore.toString(),
-                    style: TextStyle(
-                      fontSize: 18,
-                      fontFamily: 'Roboto',
-                      color: Colors.black,
-                    ),
+                  SizedBox(
+                    height: 90,
+                  ),
+                  Row(
+                    children: <Widget>[
+                      Text(
+                        'Points gained: ' + newScore.toString(),
+                        style: TextStyle(
+                          fontSize: 16,
+                          fontFamily: 'Roboto',
+                          color: Colors.black,
+                        ),
+                      ),
+                      Container(
+                        width: 20,
+                        height: 20,
+                        decoration: BoxDecoration(
+                            image: DecorationImage(
+                                image: AssetImage('images/lightning.png'))),
+                      ),
+                    ],
                   ),
                   Padding(
                     padding: const EdgeInsets.symmetric(vertical: 20),
-                    child: Text(
-                      'Number of Pomodoro intervals Completed: 20',
-                      style: TextStyle(
-                        fontSize: 18,
-                        fontFamily: 'Roboto',
-                        color: Colors.black,
-                      ),
+                    child: Row(
+                      children: <Widget>[
+                        Text(
+                          'Number of Pomodoro intervals Completed: 20',
+                          style: TextStyle(
+                            fontSize: 16,
+                            fontFamily: 'Roboto',
+                            color: Colors.black,
+                          ),
+                        ),
+                        Container(
+                          width: 20,
+                          height: 20,
+                          decoration: BoxDecoration(
+                              image: DecorationImage(
+                                  image: AssetImage('images/tomato.png'))),
+                        ),
+                      ],
                     ),
                   ),
                   Container(
@@ -446,59 +482,6 @@ class _MyProgressScreenState extends State<MyProgressScreen> {
                             color: Colors.white,
                             fontFamily: 'Domine',
                             fontSize: 24),
-                      ),
-                    ),
-                  ),
-                  Container(
-                    margin: EdgeInsets.only(bottom: 20),
-                    padding: EdgeInsets.all(15),
-                    decoration: BoxDecoration(
-                      borderRadius: BorderRadius.circular(10),
-                      color: kTurqoiseCustom,
-                    ),
-                    child: Center(
-                      child: GestureDetector(
-                        onTap: () {
-                          //check that all subtasks are  checked
-
-                          searchSnapshotForLoggedInUser.documents
-                              .forEach((document) {
-                            String documentId = document.documentID;
-                            String title = document.data['title'];
-                            if (title == widget.title) {
-                              username1stateOfSubtasks =
-                                  document.data['stateOfSubtasks'];
-                            }
-                          });
-
-                          bool flag = true;
-                          for (int i = 0;
-                              i < username1stateOfSubtasks.length;
-                              i++) {
-                            if (username1stateOfSubtasks[i] == false) {
-                              flag = false;
-                            }
-                          }
-
-                          if (flag == false) {
-                            //pop up
-                          } else {
-                            //update status to finished in both users
-                            //add dare=null in both users
-                            //add winner=loggedinuser
-                            //add loser= username2
-                            //go to you won screen
-                            //
-
-                          }
-                        },
-                        child: Text(
-                          "Finished all tasks",
-                          style: TextStyle(
-                              color: Colors.white,
-                              fontFamily: 'Domine',
-                              fontSize: 24),
-                        ),
                       ),
                     ),
                   ),

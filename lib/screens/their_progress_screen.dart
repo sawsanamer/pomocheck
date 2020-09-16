@@ -169,23 +169,48 @@ class _TheirProgressScreenState extends State<TheirProgressScreen> {
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: <Widget>[
-                  Text(
-                    'Points gained: ' + widget.myScore.toString(),
-                    style: TextStyle(
-                      fontSize: 18,
-                      fontFamily: 'Roboto',
-                      color: Colors.black,
-                    ),
+                  SizedBox(
+                    height: 90,
+                  ),
+                  Row(
+                    children: <Widget>[
+                      Text(
+                        'Points gained: ' + widget.myScore.toString(),
+                        style: TextStyle(
+                          fontSize: 16,
+                          fontFamily: 'Roboto',
+                          color: Colors.black,
+                        ),
+                      ),
+                      Container(
+                        width: 20,
+                        height: 20,
+                        decoration: BoxDecoration(
+                            image: DecorationImage(
+                                image: AssetImage('images/lightning.png'))),
+                      ),
+                    ],
                   ),
                   Padding(
                     padding: const EdgeInsets.symmetric(vertical: 20),
-                    child: Text(
-                      'Number of Pomodoro intervals Completed: 20',
-                      style: TextStyle(
-                        fontSize: 18,
-                        fontFamily: 'Roboto',
-                        color: Colors.black,
-                      ),
+                    child: Row(
+                      children: <Widget>[
+                        Text(
+                          'Number of Pomodoro intervals Completed: 20',
+                          style: TextStyle(
+                            fontSize: 16,
+                            fontFamily: 'Roboto',
+                            color: Colors.black,
+                          ),
+                        ),
+                        Container(
+                          width: 20,
+                          height: 20,
+                          decoration: BoxDecoration(
+                              image: DecorationImage(
+                                  image: AssetImage('images/tomato.png'))),
+                        ),
+                      ],
                     ),
                   ),
                 ],
