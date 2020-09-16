@@ -108,7 +108,7 @@ class _State extends State<PomodoroTimer> {
     TimeInSec = TimeInMinut * 60;
     Time = TimeInMinut * 60;
     wasPressed = false;
-    timer.cancel();
+    if (timer != null) timer.cancel();
 
     super.dispose();
   }
