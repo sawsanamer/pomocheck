@@ -268,6 +268,7 @@ class ChallengeTile extends StatelessWidget {
             }));
           },
           child: Container(
+            width: 200,
             padding: EdgeInsets.all(15),
             decoration: BoxDecoration(
               borderRadius: BorderRadius.circular(10),
@@ -297,6 +298,7 @@ class ChallengeTile extends StatelessWidget {
             }));
           },
           child: Container(
+            width: 200,
             padding: EdgeInsets.all(15),
             decoration: BoxDecoration(
               borderRadius: BorderRadius.circular(10),
@@ -332,6 +334,7 @@ class ChallengeTile extends StatelessWidget {
             }));
           },
           child: Container(
+            width: 200,
             padding: EdgeInsets.all(15),
             decoration: BoxDecoration(
               borderRadius: BorderRadius.circular(10),
@@ -347,18 +350,19 @@ class ChallengeTile extends StatelessWidget {
           ),
         );
       } else if (loserState == 'dareSent') {
-        return Container(
-          padding: EdgeInsets.all(15),
-          decoration: BoxDecoration(
-            borderRadius: BorderRadius.circular(10),
-            color: kRedCustom.withOpacity(0.4),
-          ),
-          child: GestureDetector(
-            onTap: () {
-              Navigator.push(context, MaterialPageRoute(builder: (context) {
-                return YouWon(buttonText: "Back");
-              }));
-            },
+        return GestureDetector(
+          onTap: () {
+            Navigator.push(context, MaterialPageRoute(builder: (context) {
+              return YouWon(buttonText: "Back");
+            }));
+          },
+          child: Container(
+            width: 200,
+            padding: EdgeInsets.all(15),
+            decoration: BoxDecoration(
+              borderRadius: BorderRadius.circular(10),
+              color: kRedCustom.withOpacity(0.4),
+            ),
             child: Center(
               child: Text(
                 "Dare Delivered",
@@ -412,8 +416,11 @@ class ChallengeTile extends StatelessWidget {
                           Text(title,
                               style: TextStyle(
                                   fontSize: 24,
-                                  color: kDarkGrey,
+                                  color: Colors.black,
                                   fontFamily: 'Roboto')),
+                          SizedBox(
+                            height: 5,
+                          ),
                           buttonToshow(context),
                         ],
                       )

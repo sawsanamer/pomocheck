@@ -69,25 +69,6 @@ class _ChatRoomsScreenState extends State<ChatRoomsScreen> {
     return Scaffold(
       body: chatroomList(),
       appBar: AppBar(
-        actions: <Widget>[
-          GestureDetector(
-            onTap: () {
-              authMethods.signOut();
-              HelperFunctions.saveUserLoggedInSharedPreference(false);
-
-              Navigator.pushReplacement(context,
-                  MaterialPageRoute(builder: (context) => Authenticate()));
-            },
-            child: Container(
-              padding: EdgeInsets.only(right: 10),
-              child: Icon(
-                Icons.exit_to_app,
-                color: Colors.black87,
-                size: 32,
-              ),
-            ),
-          )
-        ],
         backgroundColor: Colors.white,
         title: Center(
           child: Text(
@@ -98,7 +79,7 @@ class _ChatRoomsScreenState extends State<ChatRoomsScreen> {
         ),
       ),
       bottomNavigationBar: bottomNavigationBar(
-        currentIndex: 3,
+        currentIndex: 2,
       ),
     );
   }

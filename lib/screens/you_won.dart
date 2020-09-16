@@ -38,22 +38,22 @@ class YouWon extends StatelessWidget {
             SizedBox(
               height: 40,
             ),
-            Container(
-              margin: EdgeInsets.only(left: 20, right: 20, bottom: 20),
-              padding: EdgeInsets.all(15),
-              decoration: BoxDecoration(
-                borderRadius: BorderRadius.circular(10),
-                color: kRedCustom,
-              ),
-              child: GestureDetector(
-                onTap: () {
-                  if (buttonText == "Back") {
-                    Navigator.pop(context);
-                  }
-                  Navigator.push(context, MaterialPageRoute(builder: (context) {
-                    return FinishedChallengesScreen();
-                  }));
-                },
+            GestureDetector(
+              onTap: () {
+                if (buttonText == "Back") {
+                  Navigator.pop(context);
+                }
+                Navigator.push(context, MaterialPageRoute(builder: (context) {
+                  return FinishedChallengesScreen();
+                }));
+              },
+              child: Container(
+                margin: EdgeInsets.only(left: 20, right: 20, bottom: 20),
+                padding: EdgeInsets.all(15),
+                decoration: BoxDecoration(
+                  borderRadius: BorderRadius.circular(10),
+                  color: kRedCustom,
+                ),
                 child: Center(
                   child: Text(
                     buttonText == null ? "Next" : buttonText,

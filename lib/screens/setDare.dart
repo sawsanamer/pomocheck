@@ -56,43 +56,6 @@ class _SetDareState extends State<SetDare> {
         child: Container(
           child: Column(
             children: <Widget>[
-              Container(
-                margin: EdgeInsets.only(left: 20, right: 20, top: 20),
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: <Widget>[
-                    Text(
-                      'Statistics',
-                      style: TextStyle(
-                        fontSize: 24,
-                        fontFamily: 'Domine',
-                        color: kDarkGrey,
-                      ),
-                    ),
-                    Text(
-                      "Achievements",
-                      style: TextStyle(
-                        fontSize: 24,
-                        color: kTurqoiseCustom,
-                        fontFamily: 'Domine',
-                      ),
-                    ),
-                  ],
-                ),
-              ),
-              Row(children: <Widget>[
-                Expanded(
-                    child: Divider(
-                  color: kDarkGrey,
-                  height: 32,
-                  thickness: 1,
-                )),
-                Expanded(
-                    child: Divider(
-                  color: kTurqoiseCustom,
-                  thickness: 3,
-                )),
-              ]),
               Padding(
                 padding: EdgeInsets.symmetric(horizontal: 20),
                 child: Column(

@@ -22,6 +22,7 @@ class TheirProgressScreen extends StatefulWidget {
   final myScore;
   final progress;
   final pomodoroIntervals;
+  final pomodoroScore;
 
   TheirProgressScreen(
       {this.title,
@@ -39,7 +40,8 @@ class TheirProgressScreen extends StatefulWidget {
       this.scoreArray,
       this.myScore,
       this.progress,
-      this.pomodoroIntervals});
+      this.pomodoroIntervals,
+      this.pomodoroScore});
   @override
   _TheirProgressScreenState createState() => _TheirProgressScreenState();
 }
@@ -53,6 +55,13 @@ class _TheirProgressScreenState extends State<TheirProgressScreen> {
   @override
   void initState() {
     super.initState();
+  }
+
+  returnNumberOfIntervals() {
+    if (widget.pomodoroIntervals == null)
+      return '0';
+    else
+      return widget.pomodoroIntervals.toString();
   }
 
   @override
@@ -196,25 +205,29 @@ class _TheirProgressScreenState extends State<TheirProgressScreen> {
                   ),
                   Padding(
                     padding: const EdgeInsets.symmetric(vertical: 20),
-                    child: Row(
-                      children: <Widget>[
-                        Text(
-                          'Number of Pomodoro intervals Completed: 20',
-                          style: TextStyle(
-                            fontSize: 16,
-                            fontFamily: 'Roboto',
-                            color: Colors.black,
-                          ),
-                        ),
-                        Container(
-                          width: 20,
-                          height: 20,
-                          decoration: BoxDecoration(
-                              image: DecorationImage(
-                                  image: AssetImage('images/tomato.png'))),
-                        ),
-                      ],
-                    ),
+                    child: widget.turnOnPomodoro
+                        ? Row(
+                            children: <Widget>[
+                              Text(
+                                'Number of Pomodoro intervals Completed: ' +
+                                    returnNumberOfIntervals(),
+                                style: TextStyle(
+                                  fontSize: 16,
+                                  fontFamily: 'Roboto',
+                                  color: Colors.black,
+                                ),
+                              ),
+                              Container(
+                                width: 20,
+                                height: 20,
+                                decoration: BoxDecoration(
+                                    image: DecorationImage(
+                                        image:
+                                            AssetImage('images/tomato.png'))),
+                              ),
+                            ],
+                          )
+                        : Container(),
                   ),
                 ],
               ),

@@ -40,10 +40,6 @@ class _bottomNavigationBarState extends State<bottomNavigationBar> {
           icon: Icon(Icons.search),
         ),
         BottomNavigationBarItem(
-          title: Text('leaderboard'),
-          icon: Icon(Leaderboard.leaderboard_24px),
-        ),
-        BottomNavigationBarItem(
           title: Text('friends'),
           icon: Icon(Icons.group),
         ),
@@ -62,10 +58,10 @@ class _bottomNavigationBarState extends State<bottomNavigationBar> {
                 context,
                 MaterialPageRoute(
                     builder: (context) => PendingChallengesScreen()));
-          } else if (index == 3) {
+          } else if (index == 2) {
             Navigator.pushReplacement(context,
                 MaterialPageRoute(builder: (context) => ChatRoomsScreen()));
-          } else if (index == 4) {
+          } else if (index == 3) {
             Navigator.pushReplacement(
                 context,
                 MaterialPageRoute(

@@ -1,3 +1,4 @@
+import 'package:flutter_animation_progress_bar/flutter_animation_progress_bar.dart';
 import 'package:pomocheck/screens/finished_challenges_screen.dart';
 import 'package:pomocheck/screens/my_progress_screen.dart';
 import 'package:pomocheck/screens/pending_challenges_screen.dart';
@@ -44,6 +45,7 @@ class _OngoingChallengesScreenState extends State<OngoingChallengesScreen> {
   int progress;
   int myScore;
   int pomodoroScore;
+  int pomodoroIntervals;
 
   Widget ChallengeList() {
     return StreamBuilder(
@@ -72,6 +74,8 @@ class _OngoingChallengesScreenState extends State<OngoingChallengesScreen> {
                           myScore = await document.data['myScore'];
                           progress = await document.data['progress'];
                           pomodoroScore = await document.data['pomodoroScore'];
+                          pomodoroIntervals =
+                              await document.data['pomodoroIntervals'];
 
                           print(title);
                           print("insidee");
@@ -108,7 +112,7 @@ class _OngoingChallengesScreenState extends State<OngoingChallengesScreen> {
                             progress: progress,
                             stateOfSubtasks: stateOfSubtasksForMyProgress,
                             pomodoroPoints: pomodoroScore,
-                            pomodoroIntervals: pomodoroScore);
+                            pomodoroIntervals: pomodoroIntervals);
                       }));
                     },
                     child: ChallengeTile(
@@ -323,6 +327,23 @@ class ChallengeTile extends StatelessWidget {
     return UnspecifiedCategoryCard();
   }
 
+  trueElements() {
+    int k = 0;
+    for (int i = 0; i < stateOfSubtasks.length; i++) {
+      if (stateOfSubtasks[i] == true) k++;
+    }
+    return k;
+  }
+
+  returnPercentage() {
+    int k = (trueElements() / stateOfSubtasks.length * 100).round();
+
+    if (k == 0)
+      return ("");
+    else
+      return "$k%";
+  }
+
   @override
   Widget build(BuildContext context) {
     getName() {
@@ -363,54 +384,53 @@ class ChallengeTile extends StatelessWidget {
                           Text(title,
                               style: TextStyle(
                                   fontSize: 24,
-                                  color: kDarkGrey,
+                                  color: Colors.black,
                                   fontFamily: 'Roboto')),
-                          isSentByMe
-                              ? Text(
-                                  "Sent By me",
+                          Row(
+                            children: <Widget>[
+                              Container(
+                                height: 40,
+                                width: 200,
+                                child: FAProgressBar(
+                                  borderRadius: 20,
+                                  progressColor: kYellowCustom,
+                                  currentValue: trueElements(),
+                                  displayText: '%',
+                                  maxValue: stateOfSubtasks.length,
+                                  backgroundColor: Colors.grey.shade300,
+                                ),
+                              ),
+                              SizedBox(
+                                width: 10,
+                              ),
+                              Container(
+                                margin: EdgeInsets.only(right: 10),
+                                child: Text(
+                                  returnPercentage(),
                                   style: TextStyle(
-                                      fontSize: 20,
-                                      color: kLightGrey,
-                                      fontFamily: 'Roboto'),
-                                )
-                              : GestureDetector(
-                                  onTap: () {
-                                    Navigator.push(
-                                        context,
-                                        MaterialPageRoute(
-                                            builder: (context) =>
-                                                ReadMoreScreen(
-                                                  title: title,
-                                                  category: category,
-                                                  isSentByMe: isSentByMe,
-                                                  recievedBy: recievedBy,
-                                                  sentBy: sentBy,
-                                                  state: state,
-                                                  subtasks: subtasks,
-                                                  time: time,
-                                                  turnOnPomodoro:
-                                                      turnOnPomodoro,
-                                                  turnOnStreak: turnOnStreak,
-                                                  documentId: documentId,
-                                                )));
-                                  },
-                                  child: Container(
-                                    padding: EdgeInsets.all(15),
-                                    decoration: BoxDecoration(
-                                      borderRadius: BorderRadius.circular(10),
-                                      color: kRedCustom,
-                                    ),
-                                    child: Center(
-                                      child: Text(
-                                        "Read More",
-                                        style: TextStyle(
-                                            color: Colors.white,
-                                            fontFamily: 'Domine',
-                                            fontSize: 20),
-                                      ),
-                                    ),
-                                  ),
-                                )
+                                      color: Colors.black, fontSize: 16),
+                                ),
+                              ),
+                            ],
+                          ),
+                          Container(
+                            margin: EdgeInsets.only(top: 5),
+                            width: 200,
+                            padding: EdgeInsets.all(10),
+                            decoration: BoxDecoration(
+                              borderRadius: BorderRadius.circular(10),
+                              color: kTurqoiseCustom,
+                            ),
+                            child: Center(
+                              child: Text(
+                                "See Progress",
+                                style: TextStyle(
+                                    color: Colors.white,
+                                    fontFamily: 'Domine',
+                                    fontSize: 20),
+                              ),
+                            ),
+                          ),
                         ],
                       ),
                     ],

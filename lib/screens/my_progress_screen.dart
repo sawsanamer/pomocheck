@@ -68,6 +68,12 @@ class _MyProgressScreenState extends State<MyProgressScreen> {
   bool isFinished;
   int username2PomodoroScore;
   int username2PomodoroIntervals;
+  returnNumberOfIntervals() {
+    if (widget.pomodoroIntervals == null)
+      return '0';
+    else
+      return widget.pomodoroIntervals.toString();
+  }
 
   int newScore;
   @override
@@ -179,6 +185,7 @@ class _MyProgressScreenState extends State<MyProgressScreen> {
                                 progress: username2progress,
                                 scoreArray: username2scoreArray,
                                 pomodoroIntervals: username2PomodoroIntervals,
+                                pomodoroScore: username2PomodoroScore,
                               ),
                             ),
                           );
@@ -477,66 +484,75 @@ class _MyProgressScreenState extends State<MyProgressScreen> {
                   ),
                   Padding(
                     padding: const EdgeInsets.symmetric(vertical: 20),
-                    child: Row(
-                      children: <Widget>[
-                        Text(
-                          'Number of Pomodoro intervals Completed: 20',
-                          style: TextStyle(
-                            fontSize: 16,
-                            fontFamily: 'Roboto',
-                            color: Colors.black,
-                          ),
-                        ),
-                        Container(
-                          width: 20,
-                          height: 20,
-                          decoration: BoxDecoration(
-                              image: DecorationImage(
-                                  image: AssetImage('images/tomato.png'))),
-                        ),
-                      ],
-                    ),
+                    child: widget.turnOnPomodoro
+                        ? Row(
+                            children: <Widget>[
+                              Text(
+                                'Number of Pomodoro intervals Completed: ' +
+                                    returnNumberOfIntervals(),
+                                style: TextStyle(
+                                  fontSize: 16,
+                                  fontFamily: 'Roboto',
+                                  color: Colors.black,
+                                ),
+                              ),
+                              Container(
+                                width: 20,
+                                height: 20,
+                                decoration: BoxDecoration(
+                                    image: DecorationImage(
+                                        image:
+                                            AssetImage('images/tomato.png'))),
+                              ),
+                            ],
+                          )
+                        : Container(),
                   ),
                   GestureDetector(
-                    onTap: () {
-                      Navigator.push(context,
-                          MaterialPageRoute(builder: (context) {
-                        return PomodoroTimer(
-                          title: widget.title,
-                        );
-                      }));
-                    },
-                    child: Container(
-                      margin: EdgeInsets.only(bottom: 20),
-                      padding: EdgeInsets.all(15),
-                      decoration: BoxDecoration(
-                        borderRadius: BorderRadius.circular(10),
-                        color: kRedCustom,
-                      ),
-                      child: Center(
-                        child: Row(
-                          children: <Widget>[
-                            Container(
-                              width: 30,
-                              height: 30,
-                              decoration: BoxDecoration(
-                                  image: DecorationImage(
-                                      image: AssetImage('images/tomato.png'))),
+                    onTap: widget.turnOnPomodoro
+                        ? () {
+                            Navigator.push(context,
+                                MaterialPageRoute(builder: (context) {
+                              return PomodoroTimer(
+                                title: widget.title,
+                              );
+                            }));
+                          }
+                        : null,
+                    child: widget.turnOnPomodoro
+                        ? Container(
+                            margin: EdgeInsets.only(bottom: 20),
+                            padding: EdgeInsets.all(15),
+                            decoration: BoxDecoration(
+                              borderRadius: BorderRadius.circular(10),
+                              color: kRedCustom,
                             ),
-                            SizedBox(
-                              width: 10,
+                            child: Center(
+                              child: Row(
+                                children: <Widget>[
+                                  Container(
+                                    width: 30,
+                                    height: 30,
+                                    decoration: BoxDecoration(
+                                        image: DecorationImage(
+                                            image: AssetImage(
+                                                'images/tomato.png'))),
+                                  ),
+                                  SizedBox(
+                                    width: 10,
+                                  ),
+                                  Text(
+                                    "Start Pomodoro interval",
+                                    style: TextStyle(
+                                        color: Colors.white,
+                                        fontFamily: 'Domine',
+                                        fontSize: 24),
+                                  ),
+                                ],
+                              ),
                             ),
-                            Text(
-                              "Start Pomodoro interval",
-                              style: TextStyle(
-                                  color: Colors.white,
-                                  fontFamily: 'Domine',
-                                  fontSize: 24),
-                            ),
-                          ],
-                        ),
-                      ),
-                    ),
+                          )
+                        : Container(),
                   ),
                 ],
               ),

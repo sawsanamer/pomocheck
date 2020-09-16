@@ -1,10 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:pomocheck/components/bottomNAvigationBar.dart';
 import 'package:pomocheck/constants.dart';
+import 'package:pomocheck/helper/authenticate.dart';
 import 'package:pomocheck/helper/constants_class.dart';
+import 'package:pomocheck/helper/helperfunctions.dart';
 import 'package:pomocheck/icons/leaderboard_icons.dart';
 import 'package:pomocheck/icons/swords_icons.dart';
 import 'package:flutter_animation_progress_bar/flutter_animation_progress_bar.dart';
+import 'package:pomocheck/services/auth_methods.dart';
 
 class ProfileAchievmentsPage extends StatefulWidget {
   @override
@@ -13,9 +16,40 @@ class ProfileAchievmentsPage extends StatefulWidget {
 
 class _ProfileAchievmentsPageState extends State<ProfileAchievmentsPage> {
   int currentIndex = 0;
+  AuthMethods authMethods = AuthMethods();
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+        appBar: AppBar(
+          actions: <Widget>[
+            GestureDetector(
+              onTap: () {
+                authMethods.signOut();
+                HelperFunctions.saveUserLoggedInSharedPreference(false);
+
+                Navigator.pushReplacement(context,
+                    MaterialPageRoute(builder: (context) => Authenticate()));
+              },
+              child: Container(
+                padding: EdgeInsets.only(right: 10),
+                child: Icon(
+                  Icons.exit_to_app,
+                  color: Colors.black87,
+                  size: 32,
+                ),
+              ),
+            )
+          ],
+          backgroundColor: Colors.white,
+          title: Center(
+            child: Text(
+              "",
+              style: TextStyle(
+                  color: Colors.black, fontFamily: 'Domine', fontSize: 32),
+            ),
+          ),
+        ),
         body: SafeArea(
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.center,
@@ -41,34 +75,21 @@ class _ProfileAchievmentsPageState extends State<ProfileAchievmentsPage> {
               ),
               Container(
                 margin: EdgeInsets.symmetric(horizontal: 20),
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: <Widget>[
-                    Text(
-                      'Statistics',
-                      style: TextStyle(
-                        fontSize: 24,
-                        fontFamily: 'Domine',
-                        color: kDarkGrey,
-                      ),
-                    ),
-                    Text(
-                      "Achievements",
-                      style: TextStyle(
-                        fontSize: 24,
-                        color: kTurqoiseCustom,
-                        fontFamily: 'Domine',
-                      ),
-                    )
-                  ],
+                child: Text(
+                  "Achievements",
+                  style: TextStyle(
+                    fontSize: 24,
+                    color: kTurqoiseCustom,
+                    fontFamily: 'Domine',
+                  ),
                 ),
               ),
               Row(children: <Widget>[
                 Expanded(
                     child: Divider(
-                  color: kDarkGrey,
+                  color: kTurqoiseCustom,
                   height: 32,
-                  thickness: 1,
+                  thickness: 3,
                 )),
                 Expanded(
                     child: Divider(
@@ -155,7 +176,7 @@ class _ProfileAchievmentsPageState extends State<ProfileAchievmentsPage> {
           ),
         ),
         bottomNavigationBar: bottomNavigationBar(
-          currentIndex: 4,
+          currentIndex: 3,
         ));
   }
 }

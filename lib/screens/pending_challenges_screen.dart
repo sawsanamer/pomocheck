@@ -288,8 +288,11 @@ class ChallengeTile extends StatelessWidget {
                           Text(title,
                               style: TextStyle(
                                   fontSize: 24,
-                                  color: kDarkGrey,
+                                  color: Colors.black,
                                   fontFamily: 'Roboto')),
+                          SizedBox(
+                            height: 5,
+                          ),
                           isSentByMe
                               ? Text(
                                   "Sent By me",
