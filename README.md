@@ -7,9 +7,11 @@ Pomocheck is an application that revolves around solving the lack of motivation 
 This is a guide of how you can use the application/ further understand it.
 
 **Sign-Up**
+
 <img src="readme_images/image001.jpg" height="407" >
 
 **Log-In**
+
 <img src="readme_images/image002.jpg" height="407"  >
 
 Please log in with:
@@ -28,7 +30,7 @@ Press on challenge me to set up a challenge
 **Set up a challenge screen:**
 Choose title, subtasks and if you want to turn on points based on finishing pomodoro intervals.
 <img src="readme_images/image004.jpg" height="407"  >
-<img src="readme_images/image005.jpg"height="407"  >
+<img src="readme_images/image005.jpg" height="407"  >
 
 
 **Pending challenges screen:**
@@ -38,9 +40,10 @@ The challenges which have been set up but not yet approved. When &quot;sent by m
 **Read more screen:**
 A screen to see a received challenge details and to accept or decline incoming challenges.
 <img src="readme_images/image007.jpg" height="407" >
-<img src="readme_images/image008.jpg"height="407"  >
+<img src="readme_images/image008.jpg" height="407"  >
 
 **Ongoing challenges screen:**
+
 A screen to see the ongoing challenges and your progress in them (percentage of subtasks you have checked off). when see progress/ tile is pressed, you can see your progress compared to your friend&#39;s and how many points you gained. You can check off subtasks from there or start a pomodoro interval.
 <img src="readme_images/image009.jpg" height="407" >
 
