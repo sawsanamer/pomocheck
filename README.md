@@ -67,9 +67,13 @@ A screen to see how your opponent is doing.
 
 **Finished challenges screen:**
 Is there for you to see the challenges you have completed and their status. There are for statuses:
+
 &quot;set dare&quot; : for when you win a challenge but you still did not send your opponent a dare.
+
 &quot;dare delivered&quot;: for when you win a challenge and the dare is delivered to your oponnent.
+
 &quot;dare pending&quot;: for when you lose a challenge and the dare is not yet sent to you.
+
 &quot;take dare&quot; : for when you lose a challenge and you receive the dare.
 
 <img src="readme_images/image013.jpg" height="407"  >
