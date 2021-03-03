@@ -46,11 +46,11 @@ A screen to see a received challenge details and to accept or decline incoming c
 
 **Ongoing challenges screen:**
 
-A screen to see the ongoing challenges and your progress in them (percentage of subtasks you have checked off). when see progress/ tile is pressed, you can see your progress compared to your friend&#39;s and how many points you gained. You can check off subtasks from there or start a pomodoro interval
-.
+A screen to see the ongoing challenges and your progress in them (percentage of subtasks you have checked off). when see progress/ tile is pressed, you can see your progress compared to your friend&#39;s and how many points you gained. You can check off subtasks from there or start a pomodoro interval.
+
 <img src="readme_images/image009.jpg" height="407" >
 
-When quot; my progress screen&quot;is pressed you navigate to the see progress screen:
+When &quot; my progress screen&quot;is pressed you navigate to the see progress screen:
 You gain 12 points if you check off a subtask before your friend, and 10 if you are the second to check them off. You gain 25 points if you finish a pomodoro interval. If you do not finish it, you lose an amount of points equal to the minutes left in the timer.
 <img src="readme_images/image010.jpg" height="407" >
 
