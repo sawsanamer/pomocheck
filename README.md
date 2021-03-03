@@ -22,13 +22,13 @@ Password: 123456
 to be able to see all features described.
 
 **Chats Screen:**
-Press on username to chat with them, so you can talk about your challenges
-or
-Press on challenge me to set up a challenge
+Press on username to chat with them, so you can talk about your challenges or press on challenge me to set up a challenge.
+
 <img src="readme_images/image003.jpg" height="407"  >
 
 **Set up a challenge screen:**
 Choose title, subtasks and if you want to turn on points based on finishing pomodoro intervals.
+
 <img src="readme_images/image004.jpg" height="407"  >
 <img src="readme_images/image005.jpg" height="407"  >
 
