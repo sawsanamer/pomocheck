@@ -2,13 +2,13 @@
 
 Pomocheck is an application that revolves around solving the lack of motivation and procrastinating that most youth struggle with when they are trying to achieve their goals. It uses the Pomodoro technique combined with other techniques that gamify the whole task checking process. It lets you add up your friends and challenge them on your common goals/ projects. This was built using flutter and firebase to store information. The application was a 3 day hackathon build.
 
-**HOW TO USE it**
+**How to use the application**
 
 This is a guide of how you can use the application/ further understand it.
 
 **Sign-Up**
 
-<img src="readme_images/image001.jpg" >
+<img src="readme_images/image001.jpg height="500" width="300" >
 **Log-In**
 
 <img src="readme_images/image002.jpg" >
