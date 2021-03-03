@@ -8,7 +8,7 @@ This is a guide of how you can use the application/ further understand it.
 
 **Sign-Up**
 
-<img src="readme_images/image001.jpg" height="500" width="300" >
+<img src="readme_images/image001.jpg" height="407" >
 **Log-In**
 
 <img src="readme_images/image002.jpg" >
