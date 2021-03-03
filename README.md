@@ -52,6 +52,7 @@ A screen to see the ongoing challenges and your progress in them (percentage of 
 
 When &quot; my progress screen&quot;is pressed you navigate to the see progress screen:
 You gain 12 points if you check off a subtask before your friend, and 10 if you are the second to check them off. You gain 25 points if you finish a pomodoro interval. If you do not finish it, you lose an amount of points equal to the minutes left in the timer.
+
 <img src="readme_images/image010.jpg" height="407" >
 
 **Pomodoro timer screen:**
