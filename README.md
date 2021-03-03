@@ -1,16 +1,126 @@
-# pomocheck
+# **Pomocheck**
 
-A new Flutter application.
+Pomocheck is an application that revolves around solving the lack of motivation and procrastinating that most youth struggle with when they are trying to achieve their goals. It uses the Pomodoro technique combined with other techniques that gamify the whole task checking process. It lets you add up your friends and challenge them on your common goals/ projects. This was built using flutter and firebase to store information. The application was a 3 day hackathon build.
 
-## Getting Started
+**HOW TO USE it**
 
-This project is a starting point for a Flutter application.
+This is a guide of how you can use the application/ further understand it.
 
-A few resources to get you started if this is your first Flutter project:
+**Sign-Up**
 
-- [Lab: Write your first Flutter app](https://flutter.dev/docs/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://flutter.dev/docs/cookbook)
+<img src="readme_images/image001.jpg" >
+**Log-In**
 
-For help getting started with Flutter, view our
-[online documentation](https://flutter.dev/docs), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+<img src="readme_images/image002.jpg" >
+
+Please log in with:
+
+Email: sawsanamer@gmail.com
+Password: 123456
+
+to be able to see all features described.
+
+**Chats Screen:**
+
+Press on username to chat with them, so you can talk about your challenges
+
+or
+
+Press on challenge me to set up a challenge
+
+<img src="readme_images/image003.jpg" >
+
+**Set up a challenge screen:**
+
+Choose title, subtasks and if you want to turn on points based on finishing pomodoro intervals.
+
+<img src="readme_images/image004.jpg" >
+<img src="readme_images/image005.jpg" >
+
+
+**Pending challenges screen:**
+
+The challenges which have been set up but not yet approved. When &quot;sent by me&quot; is shown it means that it has been sent to the other user but not yet accepted/ declined. When &quot;read more&quot; button is shown it means that the other user has sent you a challenge, press read more to see all the details.
+
+<img src="readme_images/image006.jpg" >
+
+**Read more screen:**
+
+A screen to see a received challenge details and to accept or decline incoming challenges.
+
+<img src="readme_images/image007.jpg" >
+<img src="readme_images/image008.jpg" >
+
+**Ongoing challenges screen:**
+
+A screen to see the ongoing challenges and your progress in them (percentage of subtasks you have checked off). when see progress/ tile is pressed, you can see your progress compared to your friend&#39;s and how many points you gained. You can check off subtasks from there or start a pomodoro interval.
+
+<img src="readme_images/image009.jpg" >
+
+When quot; my progress screen&quot;is pressed you navigate to see progress screen:
+
+You gain 12 points if you check off a subtask before your friend, and 10 if you are the second to check them off. You gain 25 points if you finish a pomodoro interval. If you do not finish it, you lose an amount of points equal to the minutes left in the timer.
+
+<img src="readme_images/image010.jpg" >
+
+**Pomodoro timer screen:**
+
+If you exit before timer is finished you lose points, otherwise you gain points.
+
+<img src="readme_images/image011.jpg" >
+
+**Their progress screen:**
+
+A screen to see how your opponent is doing.
+
+<img src="readme_images/image012.jpg" >
+
+**Finished challenges screen:**
+
+Is there for you to see the challenges you have completed and their status. There are for statuses:
+
+&quot;set dare&quot; : for when you win a challenge but you still did not send your opponent a dare.
+
+&quot;dare delivered&quot;: for when you win a challenge and the dare is delivered to your oponnent.
+
+&quot;dare pending&quot;: for when you lose a challenge and the dare is not yet sent to you.
+
+&quot;take dare&quot; : for when you lose a challenge and you receive the dare.
+
+<img src="readme_images/image013.jpg" >
+<img src="readme_images/image014.jpg" >
+
+
+**Set dare screen:**
+
+For when you win a challenge and you want to send a dare to your opponent.
+
+<img src="readme_images/image015.jpg" >
+
+**Take dare screen:**
+
+for when you lose a challenge and you want to see the dare sent to you.
+
+<img src="readme_images/image016.jpg" >
+
+**Search page to search for other users and add them as a friend:**
+
+<img src="readme_images/image017.png" >
+
+**You lost screen:**
+
+For when you press on dare pending in the finished tab.
+
+<img src="readme_images/image018.png" >
+
+**You won screen:**
+
+For when you press on dare delivered in the finished tab.
+
+<img src="readme_images/image019.png" >
+
+Note: You can log out in the profile screen but the things there are just dummy text.
+
+Note: The app was run on a nexus 6 emulator.
+
+**And that is it! Thank you for reading.**
