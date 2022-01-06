@@ -14,12 +14,6 @@ This is a guide of how you can use the application/ further understand it.
 
 <img src="readme_images/image002.jpg" height="407"  >
 
-Please log in with:
-
-Email: sawsanamer@gmail.com
-Password: 123456
-
-to be able to see all features described.
 
 **Chats Screen:**
 Press on username to chat with them, so you can talk about your challenges or press on challenge me to set up a challenge.
